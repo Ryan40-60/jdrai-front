@@ -1,7 +1,8 @@
 {
   "name": "jdrai-front",
-  "version": "0.1.0",
+  "version": "0.0.5",
   "private": true,
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -11,6 +12,7 @@
   "dependencies": {
     "@webflow/webflow-cli": "^1.6.0",
     "autoprefixer": "10.4.14",
+    "axios": "^1.4.0",
     "eslint": "8.46.0",
     "eslint-config-next": "13.4.12",
     "next": "13.4.12",
