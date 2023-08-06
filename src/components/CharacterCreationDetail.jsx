@@ -4,10 +4,10 @@ import Link from "next/link";
 function CharacterCreationDetail({ characterClasses }) {
   const selectedClass = characterClasses[0]; // For demonstration, select the first class as the initial selected class
   const totalSkillPoints =
-    selectedClass.strengthPoints +
-    selectedClass.agilityPoints +
-    selectedClass.charismaPoints +
-    selectedClass.luckPoints;
+    selectedClass?.strength +
+    selectedClass?.agility +
+    selectedClass?.charisma +
+    selectedClass?.luck;
 
   return (
     <div
@@ -39,31 +39,19 @@ function CharacterCreationDetail({ characterClasses }) {
         <div className="skill-point-types">
           <div className="skill-point-type">
             <h4>Strength</h4>
-            <input
-              type="number"
-              value={selectedClass?.strengthPoints}
-              disabled
-            />
+            <input type="number" value={selectedClass?.strength} disabled />
           </div>
           <div className="skill-point-type">
             <h4>Agility</h4>
-            <input
-              type="number"
-              value={selectedClass?.agilityPoints}
-              disabled
-            />
+            <input type="number" value={selectedClass?.agility} disabled />
           </div>
           <div className="skill-point-type">
             <h4>Charisma</h4>
-            <input
-              type="number"
-              value={selectedClass?.charismaPoints}
-              disabled
-            />
+            <input type="number" value={selectedClass?.charisma} disabled />
           </div>
           <div className="skill-point-type">
             <h4>Luck</h4>
-            <input type="number" value={selectedClass?.luckPoints} disabled />
+            <input type="number" value={selectedClass?.luck} disabled />
           </div>
         </div>
       </div>

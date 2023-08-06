@@ -34,8 +34,8 @@ function CharacterImage({ characterName }) {
           type="text"
           id="characterName"
           name="characterName"
-          value={characterName}
           onChange={() => {}}
+          placeholder="My username..."
           required
         />
         <button type="submit">Create Character</button>
