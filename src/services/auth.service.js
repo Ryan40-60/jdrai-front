@@ -9,14 +9,13 @@ const instance = axios.create({
   headers: { "X-Custom-Header": "foobar" },
 });
 
-export async function register(formData) {
+export async function register(data) {
   const userData = {
-    username: formData.username,
-    email: formData.email,
-    password: formData.password,
+    username: data.username,
+    email: data.email,
+    password: data.password,
   };
   try {
-    console.log(userData);
     const response = await instance.post("/register", userData);
     return [response.data, null];
   } catch (error) {
@@ -24,10 +23,10 @@ export async function register(formData) {
   }
 }
 
-export async function login(formData) {
+export async function login(data) {
   const userData = {
-    log: formData.usernameOrEmail,
-    password: formData.password,
+    log: data.usernameOrEmail,
+    password: data.password,
   };
   try {
     const response = await instance.post("/login", userData);
