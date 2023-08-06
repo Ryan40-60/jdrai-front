@@ -1,14 +1,46 @@
-"use client";
-
-import React from "react";
+import React, { useState } from "react";
 import Image from "next/image";
+import { createCharacter } from "@/services/character.service";
+import { useRouter } from "next/router";
 
-function CharacterImage({ characterName }) {
-  const handleCreateCharacter = (event) => {
+function CharacterImage({ selectedClass }) {
+  const router = useRouter();
+  const [formData, setFormData] = useState({
+    characterName: "",
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevFormData) => ({
+      ...prevFormData,
+      [name]: value,
+    }));
+  };
+
+  const handleCreateCharacter = async (event) => {
     event.preventDefault();
-    // Handle character creation logic here using the characterName prop
-    // For example, you can call a service to create the character on the server-side
-    console.log(`Creating character with name: ${characterName}`);
+    if (formData.characterName.trim() === "") {
+      alert("Please fill in all fields.");
+    } else {
+      try {
+        const [characterData, characterError] = await createCharacter({
+          characterClassId: selectedClass.id,
+          name: formData.characterName,
+        });
+        if (characterError) {
+          console.log("Creation failed:", characterError);
+        } else {
+          console.log(`Creating character: ${characterData}`);
+
+          // Redirect the user to a dashboard page or any other desired page
+          // You can use the Next.js Router for client-side navigation
+          // For example:
+          router.push(`/characters/${characterData.id}`);
+        }
+      } catch (error) {
+        console.log("Error occurred while creation:", error);
+      }
+    }
   };
 
   return (
@@ -21,7 +53,7 @@ function CharacterImage({ characterName }) {
         src="/character-image.png"
         alt="Character"
         width={400}
-        height={300}
+        height={350}
       />
 
       {/* "Generate with AI" button */}
@@ -34,7 +66,8 @@ function CharacterImage({ characterName }) {
           type="text"
           id="characterName"
           name="characterName"
-          onChange={() => {}}
+          value={formData.characterName}
+          onChange={handleChange}
           placeholder="My username..."
           required
         />

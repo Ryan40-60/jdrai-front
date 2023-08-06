@@ -1,13 +1,13 @@
-"use client";
-
 import { login } from "@/services/auth.service";
 import {
   addToLocalStorage,
   fromLocalStorage,
 } from "@/services/localStorage.service";
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 
 function LoginPage() {
+  const router = useRouter();
   const [formData, setFormData] = useState({
     usernameOrEmail: "",
     password: "",
@@ -48,9 +48,7 @@ function LoginPage() {
           // Redirect the user to a dashboard page or any other desired page
           // You can use the Next.js Router for client-side navigation
           // For example:
-          // import { useRouter } from "next/router";
-          // const router = useRouter();
-          // router.push("/dashboard");
+          router.push("/characters/me");
         }
       } catch (error) {
         console.log("Error occurred while logging in:", error);

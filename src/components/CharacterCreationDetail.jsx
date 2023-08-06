@@ -1,8 +1,8 @@
 import React from "react";
 import Link from "next/link";
 
-function CharacterCreationDetail({ characterClasses }) {
-  const selectedClass = characterClasses[0]; // For demonstration, select the first class as the initial selected class
+function CharacterCreationDetail({ characterClasses, selectedClass }) {
+  // For demonstration, you can use the selected class to get the total skill points
   const totalSkillPoints =
     selectedClass?.strength +
     selectedClass?.agility +
@@ -13,7 +13,8 @@ function CharacterCreationDetail({ characterClasses }) {
     <div
       className="character-details"
       style={{
-        width: "100%",
+        paddingLeft: "7rem",
+        width: "85%",
         height: "100%",
         display: "flex",
         flexDirection: "column",

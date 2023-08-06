@@ -1,4 +1,5 @@
 import axios from "axios";
+import { fromLocalStorage } from "./localStorage.service";
 
 const BASE_URL = "http://localhost:3000";
 
@@ -8,9 +9,25 @@ const instance = axios.create({
   headers: { "X-Custom-Header": "foobar" },
 });
 
+// Add an interceptor to include the authorization header
+instance.interceptors.request.use(
+  (config) => {
+    const accessToken = fromLocalStorage("access");
+    console.log(accessToken);
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken.token}`;
+    }
+    console.log(config);
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
+
 export async function createCharacter(character) {
   try {
-    const response = await instance.post("/", { character });
+    const response = await instance.post("/", { ...character });
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to create character: ", error)];

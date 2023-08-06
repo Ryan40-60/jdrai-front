@@ -1,15 +1,11 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 import CharacterClassButton from "./CharacterClassButton"; // Import the new component
 
-function CharacterClassSelect({ characterClasses }) {
-  const [selectedClass, setSelectedClass] = useState(null); // State to hold the selected class
-
-  const handleClassSelect = (characterClass) => {
-    setSelectedClass(characterClass); // Update the selectedClass state when a button is clicked
-  };
-
+function CharacterClassSelect({
+  characterClasses,
+  selectedClass,
+  handleClassSelect,
+}) {
   return (
     <div
       className="character-class-list"
