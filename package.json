@@ -10,7 +10,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@webflow/webflow-cli": "^1.6.0",
+    "@webflow/webflow-cli": "^1.6.2",
     "autoprefixer": "10.4.14",
     "axios": "^1.4.0",
     "eslint": "8.46.0",

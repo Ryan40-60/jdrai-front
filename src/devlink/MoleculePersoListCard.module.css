@@ -1,0 +1,149 @@
+.card-personnage {
+  position: relative;
+
+  display: flex;
+  width: 200px;
+  height: 280px;
+  justify-content: center;
+  align-items: flex-end;
+
+  text-decoration: none;
+}
+
+.card-personnage:active {
+  opacity: 0.8;
+}
+
+.background-color-panneau {
+  position: relative;
+  z-index: 1;
+
+  display: flex;
+  width: 300px;
+  height: 80px;
+  padding: 0.8rem 1rem 0.5rem;
+  justify-content: center;
+  align-items: center;
+
+  background-image: url("https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cbf4caf20600e45c911537_panneau-bg.png");
+  background-position: 50% 50%;
+  background-size: 100% 100%;
+  background-repeat: no-repeat;
+}
+
+@media screen and (max-width: 479px) {
+  .background-color-panneau {
+    background-size: 100% 100%;
+  }
+}
+
+.background-color-panneau.is-little {
+  width: 230px;
+  height: 60px;
+  margin-bottom: 0.5rem;
+  flex: 0 0 auto;
+}
+
+.background-color-panneau.is-little.is-rotate_panneau {
+  flex-direction: column;
+  transform: rotate(-2deg);
+}
+
+.margin-top {
+  margin-right: 0rem;
+  margin-bottom: 0rem;
+  margin-left: 0rem;
+}
+
+@media screen and (max-width: 991px) {
+  .margin-top {
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .margin-top {
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .margin-top {
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+.background-color-panneau.margin-top.margin-auto {
+  margin-top: auto;
+}
+
+.panneau-text {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  flex-direction: column;
+}
+
+.panneau-text.is-rotate {
+  align-items: center;
+  transform: rotate(2deg);
+}
+
+.pseudo {
+  overflow: hidden;
+  width: 100%;
+
+  font-family: Jomhuria;
+  font-size: 2.1rem;
+  line-height: 0.7;
+  font-weight: 400;
+  white-space: pre;
+  word-break: break-all;
+}
+
+.text-align-center {
+  text-align: center;
+}
+
+.pseudo.text-align-center.is-rotate_panneau {
+  transform: rotate(2deg);
+}
+
+.pseudo.is-little {
+  font-size: 1.6rem;
+}
+
+.text-size-small {
+  font-size: 0.8rem;
+}
+
+.cardre-personnage {
+  position: absolute;
+
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
+
+  border-radius: 8px;
+
+  object-fit: cover;
+  object-position: 50% 45%;
+}
+
+.personnage-photo {
+  position: absolute;
+
+  width: 100%;
+  height: 100%;
+
+  border-radius: 8px;
+
+  object-fit: cover;
+  object-position: 50% 45%;
+}
