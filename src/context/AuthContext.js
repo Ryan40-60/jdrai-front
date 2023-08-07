@@ -1,6 +1,5 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useCallback } from "react";
 import { fromLocalStorage } from "@/services/localStorage.service";
-import { login } from "@/services/auth.service";
 
 const AuthContext = createContext();
 
@@ -17,26 +16,26 @@ export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(fromLocalStorage("user"));
   //   let [loading, setLoading] = useState(true);
 
-  //   const history = useHistory();
+  //   const loginUser = useCallback(async (e) => {
+  //     e.preventDefault();
+  //     const body = {
+  //       usernameOrEmail: e.target.usernameOrEmail.value,
+  //       password: e.target.password.value,
+  //     };
+  //     const [userData, userError] = await login(body);
 
-  let loginUser = async (e) => {
-    e.preventDefault();
-    const usernameOrEmail = e.target.usernameOrEmail.value;
-    const password = e.target.password.value;
-    const [userData, userError] = login(usernameOrEmail, password);
-
-    if (userError) {
-      console.log(userError);
-    } else {
-      setUser(userData.user);
-      setAccessToken(userData.access);
-      setRefreshToken(userData.refresh);
-      addToLocalStorage("user", user);
-      addToLocalStorage("access", access);
-      addToLocalStorage("refresh", refresh);
-      history.push("/");
-    }
-  };
+  //     if (userError) {
+  //       console.log(userError);
+  //     } else {
+  //       setUser(userData.user);
+  //       setAccessToken(userData.access);
+  //       setRefreshToken(userData.refresh);
+  //       addToLocalStorage("user", userData.user);
+  //       addToLocalStorage("access", userData.access);
+  //       addToLocalStorage("refresh", userData.refresh);
+  //       router.push("/");
+  //     }
+  //   }, []);
 
   //   let logoutUser = () => {
   //     setAuthTokens(null);
@@ -47,11 +46,11 @@ export const AuthProvider = ({ children }) => {
 
   let contextData = {
     user: user,
-    //     authTokens: authTokens,
-    //     setAuthTokens: setAuthTokens,
-    //     setUser: setUser,
-    //     loginUser: loginUser,
-    //     logoutUser: logoutUser,
+    setUser: setUser,
+    accessToken: accessToken,
+    setAccessToken: setAccessToken,
+    refreshToken: refreshToken,
+    setRefreshToken: setRefreshToken,
   };
 
   //   useEffect(() => {

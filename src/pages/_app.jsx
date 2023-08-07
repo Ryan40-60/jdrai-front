@@ -1,9 +1,12 @@
 import "@/devlink/global.css"
+import { AuthProvider } from "@/context/AuthContext";
 
 function App({ Component, pageProps }) {
   return (
     <div>
-      <Component {...pageProps} />
+      <AuthProvider>
+        <Component {...pageProps} />
+      </AuthProvider>
     </div>
   );
 }
