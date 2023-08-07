@@ -7,4 +7,7 @@ declare function OrganismDetailPerso(props: {
   backButtonLink?: Types.Basic.Link;
   className?: React.ReactNode;
   classDescription?: React.ReactNode;
+  pointLeft?: React.ReactNode;
+  pseudo?: React.ReactNode;
+  personnageImgImage?: Types.Asset.Image;
 }): React.JSX.Element;
