@@ -1,15 +1,21 @@
 import { login } from "@/services/auth.service";
-import {
-  addToLocalStorage,
-  fromLocalStorage,
-} from "@/services/localStorage.service";
-import React, { useState, useContext } from "react";
+import { addToLocalStorage } from "@/services/localStorage.service";
+import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
-// import AuthContext from "@/context/AuthContext";
+import AuthContext from "@/context/AuthContext";
 
 function LoginPage() {
   const router = useRouter();
-  //   const { loginUser } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
+
+  useEffect(() => {
+    if (user) {
+      router.push("/characters/me");
+    } else {
+      router.push("/login");
+    }
+  }, [user, router]);
+
   const [formData, setFormData] = useState({
     usernameOrEmail: "",
     password: "",
@@ -47,9 +53,6 @@ function LoginPage() {
           addToLocalStorage("access", access);
           addToLocalStorage("refresh", refresh);
 
-          // Redirect the user to a dashboard page or any other desired page
-          // You can use the Next.js Router for client-side navigation
-          // For example:
           router.push("/characters/me");
         }
       } catch (error) {
