@@ -8,7 +8,9 @@ declare function OrganismNav(props: {
   navLinkWrapperSlot?: Types.Devlink.Slot;
   handleClassSelect?: Types.Devlink.RuntimeProps;
   buttonWarningRuntimeProps?: Types.Devlink.RuntimeProps;
-  navActionWrapperVisibility?: Types.Visibility.VisibilityConditions;
+  navClassWrapperVisibility?: Types.Visibility.VisibilityConditions;
   navButtonsWrapperVisibility?: Types.Visibility.VisibilityConditions;
   navLinkWrapperVisibility?: Types.Visibility.VisibilityConditions;
+  buttonRuntimeProps?: Types.Devlink.RuntimeProps;
+  navEditButtonsWrapperVisibility?: Types.Visibility.VisibilityConditions;
 }): React.JSX.Element;

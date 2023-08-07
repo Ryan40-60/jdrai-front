@@ -30,7 +30,9 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
         className={_utils.cx(_styles, "section-screen")}
         tag="main"
       >
-        <OrganismNav buttonsWrapperVisibility={true} />
+        <OrganismNav
+          navActionWrapperVisibility={false}
+          navLinkWrapperVisibility={true} />
         <OrganismPersoList personnagesListWrapperSlot={
           (
             <>

@@ -20,8 +20,9 @@ export function PagePersoList({
         tag="main"
       >
         <OrganismNav
-          navActionWrapperVisibility={false}
+          navClassWrapperVisibility={false}
           navLinkWrapperVisibility={true}
+          navEditButtonsWrapperVisibility={false}
         />
         <OrganismPersoList />
       </_Builtin.Block>

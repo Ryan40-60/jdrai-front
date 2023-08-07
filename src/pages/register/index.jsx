@@ -1,5 +1,6 @@
 "use client";
 
+import { PageInscription } from "@/devlink";
 import { register } from "@/services/auth.service";
 import React, { useState } from "react";
 
@@ -13,6 +14,7 @@ function RegisterPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
+    console.log({ target: { name, value } });
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -21,6 +23,7 @@ function RegisterPage() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    console.log({ formData });
     if (
       formData.username.trim() === "" ||
       formData.email.trim() === "" ||
@@ -54,60 +57,12 @@ function RegisterPage() {
   };
 
   return (
-    <div className="wrapper">
-      <h1>Register</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="username">Username:</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            value={formData.username}
-            onChange={handleChange}
-            required
-            aria-label="Username"
-          />
-        </div>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            value={formData.email}
-            onChange={handleChange}
-            required
-            aria-label="Email"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            aria-label="Password"
-          />
-        </div>
-        <div>
-          <label htmlFor="confirmPassword">Confirm Password:</label>
-          <input
-            type="password"
-            id="confirmPassword"
-            name="confirmPassword"
-            value={formData.confirmPassword}
-            onChange={handleChange}
-            required
-            aria-label="Confirm Password"
-          />
-        </div>
-        <button type="submit">Register</button>
-      </form>
-    </div>
+    <PageInscription onSubmitFormRuntimeProps={
+      {
+        onSubmit: handleSubmit,
+        onChange: handleChange
+      }
+    } />
   );
 }
 

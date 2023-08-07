@@ -17,7 +17,8 @@ export function PageGenerateur({ as: _Component = _Builtin.Block }) {
         <OrganismNav
           navButtonsWrapperVisibility={false}
           navLinkWrapperVisibility={false}
-          navActionWrapperVisibility={true}
+          navClassWrapperVisibility={true}
+          navEditButtonsWrapperVisibility={false}
         />
         <OrganismGenerateurPersonnage />
       </_Builtin.Block>

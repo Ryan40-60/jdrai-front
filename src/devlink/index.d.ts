@@ -18,6 +18,7 @@ export * from "./MoleculeCompetenceCard";
 export * from "./MoleculeNavButtonsWrapper";
 export * from "./MoleculeNavLinkWrapper";
 export * from "./MoleculePersoListCard";
+export * from "./OrganismDetailPerso";
 export * from "./OrganismGenerateurPersonnage";
 export * from "./OrganismNav";
 export * from "./OrganismPersoList";
