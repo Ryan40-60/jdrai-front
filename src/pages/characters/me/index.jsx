@@ -18,8 +18,6 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
       .catch(([data, error]) => console.log(error));
   }, []);
 
-
-
   return (
     <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
       <GlobalStyles />
@@ -29,16 +27,21 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
       >
         <OrganismNav
           navActionWrapperVisibility={false}
-          navLinkWrapperVisibility={true} />
-        <OrganismPersoList personnagesListWrapperSlot={
-          (
+          navLinkWrapperVisibility={true}
+        />
+        <OrganismPersoList
+          personnagesListWrapperSlot={
             <>
-              {
-                characters?.map((character) => <MoleculePersoListCard key={character.id} pseudoText={character.name} classText={character.class.class} />)
-              }
+              {characters?.map((character) => (
+                <MoleculePersoListCard
+                  key={character.id}
+                  pseudoText={character.name}
+                  classText={character.class.class}
+                />
+              ))}
             </>
-          )
-        } />
+          }
+        />
       </_Builtin.Block>
     </_Component>
   );

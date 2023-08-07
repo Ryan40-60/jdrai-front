@@ -24,6 +24,9 @@ export function OrganismDetailPerso({
     </>
   ),
   classDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique. Duis cursus, mi quis viverra ornare, eros dolor interdum nulla, ut commodo diam libero vitae erat. Aenean faucibus nibh et justo cursus id rutrum lorem imperdiet. Nunc ut sem vitae risus tristique posuere.",
+  pointLeft = "",
+  pseudo = "Nom du pseudo",
+  personnageImgImage = "https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cce7a2b4c8dd158beee42c_personnage.png",
 }) {
   _interactions.useInteractions(_interactionsData, _styles);
 
@@ -110,8 +113,7 @@ export function OrganismDetailPerso({
                 className={_utils.cx(_styles, "text-size-small")}
                 tag="div"
               >
-                <_Builtin.Strong>{"20"}</_Builtin.Strong>
-                {""}
+                {pointLeft}
               </_Builtin.Block>
               <_Builtin.Block
                 className={_utils.cx(_styles, "text-size-small")}
@@ -155,54 +157,32 @@ export function OrganismDetailPerso({
           loading="lazy"
           width="auto"
           height="auto"
-          src="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cce7a2b4c8dd158beee42c_personnage.png"
+          src={personnageImgImage}
         />
         <_Builtin.Block
           className={_utils.cx(_styles, "background-color-cadre")}
           tag="div"
         >
-          <_Builtin.FormWrapper
-            className={_utils.cx(_styles, "personnage-content")}
+          <_Builtin.Block
+            className={_utils.cx(
+              _styles,
+              "background-color-panneau",
+              "margin-top",
+              "margin-auto"
+            )}
+            tag="div"
           >
-            <_Builtin.FormForm
-              className={_utils.cx(_styles, "form")}
-              name="wf-form-personnage-form"
-              data-name="personnage-form"
-              method="get"
-              id="wf-form-personnage-form"
+            <_Builtin.Block
+              className={_utils.cx(
+                _styles,
+                "heading-style-h4",
+                "text-align-center"
+              )}
+              tag="div"
             >
-              <_Builtin.Block
-                className={_utils.cx(
-                  _styles,
-                  "background-color-panneau",
-                  "margin-top",
-                  "margin-auto"
-                )}
-                tag="div"
-              >
-                <_Builtin.Block
-                  className={_utils.cx(
-                    _styles,
-                    "heading-style-h4",
-                    "text-align-center"
-                  )}
-                  tag="div"
-                >
-                  {"Nom du pseudo"}
-                </_Builtin.Block>
-              </_Builtin.Block>
-            </_Builtin.FormForm>
-            <_Builtin.FormSuccessMessage>
-              <_Builtin.Block tag="div">
-                {"Thank you! Your submission has been received!"}
-              </_Builtin.Block>
-            </_Builtin.FormSuccessMessage>
-            <_Builtin.FormErrorMessage>
-              <_Builtin.Block tag="div">
-                {"Oops! Something went wrong while submitting the form."}
-              </_Builtin.Block>
-            </_Builtin.FormErrorMessage>
-          </_Builtin.FormWrapper>
+              {pseudo}
+            </_Builtin.Block>
+          </_Builtin.Block>
         </_Builtin.Block>
       </_Builtin.Block>
     </_Component>

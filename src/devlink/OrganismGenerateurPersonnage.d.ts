@@ -7,7 +7,8 @@ declare function OrganismGenerateurPersonnage(props: {
   backButtonLink?: Types.Basic.Link;
   classDescription?: React.ReactNode;
   className?: React.ReactNode;
-  buttonRuntimeProps?: Types.Devlink.RuntimeProps;
-  buttonFormRuntimeProps?: Types.Devlink.RuntimeProps;
+  generateRuntimeProps?: Types.Devlink.RuntimeProps;
+  onSubmitRuntimeProps?: Types.Devlink.RuntimeProps;
   pointLeft?: React.ReactNode;
+  personnageImgImage?: Types.Asset.Image;
 }): React.JSX.Element;

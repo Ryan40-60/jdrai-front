@@ -2303,10 +2303,11 @@ a {
 }
 
 a:hover {
-  color: hsla(0, 0.00%, 100.00%, 1.00);
+  color: var(--tan-00f7ad81);
 }
 
 a:active {
+  opacity: 0.8;
   color: var(--saddleBrown-35c41fbe);
 }
 
