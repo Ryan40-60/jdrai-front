@@ -1,13 +1,5 @@
-import axios from "axios";
+import axiosInstance from "@/config/axios.config";
 import { fromLocalStorage } from "./localStorage.service";
-
-const BASE_URL = "http://localhost:3000";
-
-const instance = axios.create({
-  baseURL: `${BASE_URL}/auth`,
-  timeout: 1000,
-  headers: { "X-Custom-Header": "foobar" },
-});
 
 export async function register(data) {
   const userData = {
@@ -16,7 +8,7 @@ export async function register(data) {
     password: data.password,
   };
   try {
-    const response = await instance.post("/register", userData);
+    const response = await axiosInstance.post("/auth/register", userData);
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to register user: ", error)];
@@ -24,12 +16,12 @@ export async function register(data) {
 }
 
 export async function login(data) {
-  const userData = {
+  const body = {
     log: data.usernameOrEmail,
     password: data.password,
   };
   try {
-    const response = await instance.post("/login", userData);
+    const response = await axiosInstance.post("/auth/login", body);
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to log user: ", error)];
@@ -38,7 +30,7 @@ export async function login(data) {
 
 export async function logout() {
   try {
-    const response = await instance.post("/logout");
+    const response = await axiosInstance.post("/auth/logout");
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to logout user: ", error)];

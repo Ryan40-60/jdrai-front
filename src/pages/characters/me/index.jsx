@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { listCharacters } from "@/services/character.service";
 
-function Page() {
+function CharactersPage() {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
@@ -17,6 +17,9 @@ function Page() {
       <div className="wrapper">
         <h1>My Characters</h1>
         <p>No characters found.</p>
+        <Link href={"/characters/create"}>
+          <button>New character</button>
+        </Link>
       </div>
     );
   }
@@ -38,4 +41,4 @@ function Page() {
   );
 }
 
-export default Page;
+export default CharactersPage;

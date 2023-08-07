@@ -3,6 +3,11 @@ export function addToLocalStorage(key, value) {
 }
 
 export function fromLocalStorage(key) {
-  const response = localStorage.getItem(key);
-  return JSON.parse(response);
+  if (typeof window !== "undefined" && window.localStorage) {
+    const response = localStorage.getItem(key);
+    if (!response) {
+      return null;
+    }
+    return JSON.parse(response);
+  }
 }
