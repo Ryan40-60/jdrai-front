@@ -1,8 +1,9 @@
 import React from "react";
 import * as _Builtin from "./_Builtin";
 import { AtomsNavLink } from "./AtomsNavLink";
-import { AtomsButtonProfil } from "./AtomsButtonProfil";
 import { AtomsButtonIconWarning } from "./AtomsButtonIconWarning";
+import { AtomsButtonIcon } from "./AtomsButtonIcon";
+import { AtomsButtonProfil } from "./AtomsButtonProfil";
 import * as _utils from "./utils";
 import _styles from "./OrganismNav.module.css";
 
@@ -13,9 +14,11 @@ export function OrganismNav({
   navLinkWrapperSlot,
   handleClassSelect = {},
   buttonWarningRuntimeProps = {},
-  navActionWrapperVisibility = true,
+  navClassWrapperVisibility = true,
   navButtonsWrapperVisibility = true,
   navLinkWrapperVisibility = false,
+  buttonRuntimeProps = {},
+  navEditButtonsWrapperVisibility = true,
 }) {
   return (
     <_Component
@@ -33,7 +36,7 @@ export function OrganismNav({
           height="auto"
           src={navLogo}
         />
-        {navActionWrapperVisibility ? (
+        {navClassWrapperVisibility ? (
           <_Builtin.Block
             className={_utils.cx(_styles, "nav-action_wrapper")}
             tag="div"
@@ -97,6 +100,18 @@ export function OrganismNav({
                 />
               </>
             )}
+          </_Builtin.Block>
+        ) : null}
+        {navEditButtonsWrapperVisibility ? (
+          <_Builtin.Block
+            className={_utils.cx(_styles, "nav-edit_buttons_wrapper")}
+            tag="div"
+          >
+            <AtomsButtonIconWarning
+              buttonWarningRuntimeProps={buttonWarningRuntimeProps}
+              buttonWarningIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce1785090550f27ad94614_Delete.svg"
+            />
+            <AtomsButtonIcon buttonRuntimeProps={buttonRuntimeProps} />
           </_Builtin.Block>
         ) : null}
         {navButtonsWrapperVisibility ? (

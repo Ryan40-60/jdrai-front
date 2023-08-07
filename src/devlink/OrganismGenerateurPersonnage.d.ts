@@ -9,4 +9,5 @@ declare function OrganismGenerateurPersonnage(props: {
   className?: React.ReactNode;
   buttonRuntimeProps?: Types.Devlink.RuntimeProps;
   buttonFormRuntimeProps?: Types.Devlink.RuntimeProps;
+  pointLeft?: React.ReactNode;
 }): React.JSX.Element;

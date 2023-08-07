@@ -14,10 +14,7 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
   useEffect(() => {
     // Fetch the characters data from the API using the listCharacters service
     listCharacters()
-      .then(([data, error]) => {
-        console.log({ data });
-        setCharacters(data)
-      })
+      .then(([data, error]) => setCharacters(data))
       .catch(([data, error]) => console.log(error));
   }, []);
 
@@ -30,7 +27,9 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
         className={_utils.cx(_styles, "section-screen")}
         tag="main"
       >
-        <OrganismNav buttonsWrapperVisibility={true} />
+        <OrganismNav
+          navActionWrapperVisibility={false}
+          navLinkWrapperVisibility={true} />
         <OrganismPersoList personnagesListWrapperSlot={
           (
             <>

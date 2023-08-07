@@ -22,6 +22,7 @@ export function OrganismGenerateurPersonnage({
   ),
   buttonRuntimeProps = {},
   buttonFormRuntimeProps = {},
+  pointLeft = "",
 }) {
   return (
     <_Component className={_utils.cx(_styles, "screen-content")}>
@@ -113,7 +114,12 @@ export function OrganismGenerateurPersonnage({
                   className={_utils.cx(_styles, "text-size-small")}
                   tag="div"
                 >
-                  <_Builtin.Strong>{"20 "}</_Builtin.Strong>
+                  {pointLeft}
+                </_Builtin.Block>
+                <_Builtin.Block
+                  className={_utils.cx(_styles, "text-size-small")}
+                  tag="div"
+                >
                   {"points restants"}
                 </_Builtin.Block>
               </_Builtin.Block>
