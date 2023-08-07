@@ -1,0 +1,40 @@
+.competence-card {
+  display: flex;
+  height: 180px;
+  padding: 16px 16px 24px;
+  flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
+
+  border-style: solid;
+  border-width: 2px;
+  border-color: hsla(38.39999999999999, 27.78%, 35.29%, 1.00);
+  border-radius: 8px;
+
+  background-image: linear-gradient(231deg, hsla(0, 0.00%, 100.00%, 0.40), hsla(0, 0.00%, 100.00%, 0.01) 61%);
+
+  backdrop-filter: blur(32px);
+}
+
+.text-size-small {
+  font-size: 0.8rem;
+}
+
+.competence-point {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  grid-column-gap: 0.25rem;
+  grid-row-gap: 0.25rem;
+}
+
+.points-card {
+  height: 32px;
+  flex: 1;
+  border-radius: 4px;
+  background-color: hsla(43.97260273972603, 70.19%, 59.22%, 0.15);
+}
+
+.points-card.is-actif {
+  background-color: hsla(43.97260273972603, 70.19%, 59.22%, 0.60);
+}

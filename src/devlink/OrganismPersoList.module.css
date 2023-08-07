@@ -1,0 +1,38 @@
+.personnages-list {
+  display: flex;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 4rem;
+  flex-direction: column;
+}
+
+@media screen and (max-width: 991px) {
+  .personnages-list {
+    height: auto;
+    min-height: 100svh;
+    padding-bottom: 3rem;
+  }
+}
+
+.background-color-paper {
+  background-image: url("https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cbeeb723ced942769af6dc_Paper.png");
+  background-position: 0px 0px;
+  background-size: cover;
+  box-shadow: inset 0 0 16px 0 hsla(0, 0.00%, 0.00%, 0.80);
+}
+
+.padding-medium {
+  padding: 2rem;
+}
+
+@media screen and (max-width: 991px) {
+  .padding-medium {
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .padding-medium {
+    padding: 1.25rem;
+  }
+}

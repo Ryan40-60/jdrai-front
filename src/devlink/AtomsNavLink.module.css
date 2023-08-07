@@ -1,0 +1,49 @@
+.nav-link {
+  display: flex;
+  width: 80px;
+  height: 80px;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  grid-column-gap: 0.5rem;
+  grid-row-gap: 0.5rem;
+
+  opacity: 0.3;
+
+  font-family: Jomhuria;
+  color: hsla(42.10526315789474, 0.00%, 100.00%, 1.00);
+  font-size: 1.7rem;
+  line-height: 0.6;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 479px) {
+  .nav-link.background-color-card {
+    width: 65px;
+    height: 65px;
+  }
+}
+
+.background-color-card {
+  background-color: hsla(0, 0.00%, 0.00%, 0.00);
+  background-image: url("https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cbf4cab1e9d945c7657681_card-bg.png");
+  background-position: 50% 50%;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+.nav-link.background-color-card.is-active {
+  opacity: 1;
+}
+
+.class-icon {
+  width: 40px;
+  height: 35px;
+  object-fit: contain;
+}
+
+@media screen and (max-width: 479px) {
+  .class-icon {
+    width: 30px;
+  }
+}
