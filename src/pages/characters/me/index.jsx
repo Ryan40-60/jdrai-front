@@ -37,7 +37,12 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
           (
             <>
               {
-                characters?.map((character) => <MoleculePersoListCard key={character.id} pseudoText={character.name} classText={character.class.class} />)
+                characters?.map((character) => <MoleculePersoListCard
+                  key={character.id}
+                  pseudoText={character.name}
+                  classText={character.class.class}
+                  cardPersonnageLink={{ href: `/characters/${character.id}` }}
+                />)
               }
             </>
           )

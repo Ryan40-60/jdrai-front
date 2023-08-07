@@ -3,6 +3,7 @@ import { addToLocalStorage } from "@/services/localStorage.service";
 import React, { useState, useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "@/context/AuthContext";
+import { PageConnexion } from "@/devlink";
 
 function LoginPage() {
   const router = useRouter();
@@ -62,45 +63,9 @@ function LoginPage() {
   };
 
   return (
-    <div className="wrapper">
-      <h1>Login</h1>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="usernameOrEmail">Username or Email:</label>
-          <input
-            type="text"
-            id="usernameOrEmail"
-            name="usernameOrEmail"
-            value={formData.usernameOrEmail}
-            onChange={handleChange}
-            required
-            aria-label="Username or Email"
-            aria-describedby="usernameOrEmailError"
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            value={formData.password}
-            onChange={handleChange}
-            required
-            aria-label="Password"
-          />
-        </div>
-        <button type="submit">Login</button>
-        <p
-          id="usernameOrEmailError"
-          style={{ color: "red" }}
-          aria-live="assertive"
-          aria-atomic="true"
-        >
-          {/* Display any error messages here */}
-        </p>
-      </form>
-    </div>
+    <PageConnexion onSubmitRuntimeProps={
+      { onChange: handleChange, onSubmit: handleSubmit }
+    } />
   );
 }
 

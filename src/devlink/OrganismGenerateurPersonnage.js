@@ -20,9 +20,10 @@ export function OrganismGenerateurPersonnage({
       <br />
     </>
   ),
-  buttonRuntimeProps = {},
-  buttonFormRuntimeProps = {},
+  generateRuntimeProps = {},
+  onSubmitRuntimeProps = {},
   pointLeft = "",
+  personnageImgImage = "https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cce7a2b4c8dd158beee42c_personnage.png",
 }) {
   return (
     <_Component className={_utils.cx(_styles, "screen-content")}>
@@ -158,7 +159,7 @@ export function OrganismGenerateurPersonnage({
             loading="lazy"
             width="auto"
             height="auto"
-            src="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cce7a2b4c8dd158beee42c_personnage.png"
+            src={personnageImgImage}
           />
           <_Builtin.Block
             className={_utils.cx(_styles, "background-color-cadre")}
@@ -169,7 +170,7 @@ export function OrganismGenerateurPersonnage({
               tag="div"
             >
               <AtomsButtonSecondary
-                buttonRuntimeProps={buttonRuntimeProps}
+                buttonRuntimeProps={generateRuntimeProps}
                 buttonText="Générer avec l'IA"
               />
               <_Builtin.Block
@@ -193,7 +194,7 @@ export function OrganismGenerateurPersonnage({
                   type="submit"
                   value="Valider"
                   data-wait="Please wait..."
-                  {...buttonFormRuntimeProps}
+                  {...onSubmitRuntimeProps}
                 />
               </_Builtin.Block>
             </_Builtin.Block>

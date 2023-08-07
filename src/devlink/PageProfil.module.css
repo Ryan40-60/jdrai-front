@@ -1,0 +1,12 @@
+.section-screen {
+  display: flex;
+  width: 100%;
+  height: 100svh;
+}
+
+@media screen and (max-width: 991px) {
+  .section-screen {
+    height: auto;
+    min-height: 100svh;
+  }
+}
