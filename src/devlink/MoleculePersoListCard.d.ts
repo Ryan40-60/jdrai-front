@@ -5,7 +5,6 @@ declare function MoleculePersoListCard(props: {
   as?: React.ElementType;
   personnagePhotoImage?: Types.Asset.Image;
   pseudoText?: React.ReactNode;
-  textSizeSmallText?: React.ReactNode;
-  cardPersonnageRuntimeProps?: Types.Devlink.RuntimeProps;
+  classText?: React.ReactNode;
   cardPersonnageLink?: Types.Basic.Link;
 }): React.JSX.Element;

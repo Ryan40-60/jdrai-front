@@ -17,6 +17,10 @@
   text-decoration: none;
 }
 
+.nav-link.background-color-card:global(.w--current) {
+  opacity: 1;
+}
+
 @media screen and (max-width: 479px) {
   .nav-link.background-color-card {
     width: 65px;

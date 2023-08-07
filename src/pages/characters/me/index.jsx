@@ -1,43 +1,47 @@
 import React, { useEffect, useState } from "react";
-import Link from "next/link";
+import * as _Builtin from "@/devlink/_Builtin";
+import { GlobalStyles } from "@/devlink/GlobalStyles";
+import { OrganismNav } from "@/devlink/OrganismNav";
+import { OrganismPersoList } from "@/devlink/OrganismPersoList";
+import * as _utils from "@/devlink/utils";
+import _styles from "@/devlink/PagePersoList.module.css";
 import { listCharacters } from "@/services/character.service";
+import { MoleculePersoListCard } from "@/devlink";
 
-function CharactersPage() {
+function CharactersPage({ as: _Component = _Builtin.Block }) {
   const [characters, setCharacters] = useState([]);
 
   useEffect(() => {
     // Fetch the characters data from the API using the listCharacters service
     listCharacters()
-      .then(([data, error]) => setCharacters(data))
+      .then(([data, error]) => {
+        console.log({ data });
+        setCharacters(data)
+      })
       .catch(([data, error]) => console.log(error));
   }, []);
 
-  if (characters.length === 0) {
-    return (
-      <div className="wrapper">
-        <h1>My Characters</h1>
-        <p>No characters found.</p>
-        <Link href={"/characters/create"}>
-          <button>New character</button>
-        </Link>
-      </div>
-    );
-  }
+
 
   return (
-    <div className="wrapper">
-      <h1>My Characters</h1>
-      <div>
-        {characters.map((character) => (
-          <Link key={character.id} href={`/characters/${character.id}`}>
-            <button>{character.name}</button>
-          </Link>
-        ))}
-        <Link href={"/characters/create"}>
-          <button>New character</button>
-        </Link>
-      </div>
-    </div>
+    <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
+      <GlobalStyles />
+      <_Builtin.Block
+        className={_utils.cx(_styles, "section-screen")}
+        tag="main"
+      >
+        <OrganismNav buttonsWrapperVisibility={true} />
+        <OrganismPersoList personnagesListWrapperSlot={
+          (
+            <>
+              {
+                characters?.map((character) => <MoleculePersoListCard key={character.id} pseudoText={character.name} classText={character.class.class} />)
+              }
+            </>
+          )
+        } />
+      </_Builtin.Block>
+    </_Component>
   );
 }
 

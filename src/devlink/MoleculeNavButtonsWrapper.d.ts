@@ -1,7 +1,7 @@
 import * as React from "react";
 import * as Types from "./types";
 
-declare function MoleculePersoListCardWrapper(props: {
+declare function MoleculeNavButtonsWrapper(props: {
   as?: React.ElementType;
-  personnagesListWrapperSlot?: Types.Devlink.Slot;
+  navButtonsWrapperSlot?: Types.Devlink.Slot;
 }): React.JSX.Element;

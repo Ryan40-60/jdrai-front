@@ -169,6 +169,10 @@
   font-weight: 700;
 }
 
+.hide {
+  display: none;
+}
+
 .form_input {
   min-height: 3rem;
   margin-bottom: 3px;

@@ -3,6 +3,6 @@ import * as Types from "./types";
 
 declare function AtomsButtonIconWarning(props: {
   as?: React.ElementType;
-  buttonRuntimeProps?: Types.Devlink.RuntimeProps;
-  buttinIconImg?: Types.Asset.Image;
+  buttonWarningRuntimeProps?: Types.Devlink.RuntimeProps;
+  buttonWarningIcon?: Types.Asset.Image;
 }): React.JSX.Element;

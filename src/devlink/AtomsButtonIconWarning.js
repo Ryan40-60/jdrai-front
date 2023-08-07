@@ -5,8 +5,8 @@ import _styles from "./AtomsButtonIconWarning.module.css";
 
 export function AtomsButtonIconWarning({
   as: _Component = _Builtin.Link,
-  buttonRuntimeProps = {},
-  buttinIconImg = "https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce1785090550f27ad94614_Delete.svg",
+  buttonWarningRuntimeProps = {},
+  buttonWarningIcon = "https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce1785090550f27ad94614_Delete.svg",
 }) {
   return (
     <_Component
@@ -15,14 +15,14 @@ export function AtomsButtonIconWarning({
       options={{
         href: "#",
       }}
-      {...buttonRuntimeProps}
+      {...buttonWarningRuntimeProps}
     >
       <_Builtin.Image
         className={_utils.cx(_styles, "buttin-icon-img")}
         loading="lazy"
         width="auto"
         height="auto"
-        src={buttinIconImg}
+        src={buttonWarningIcon}
       />
     </_Component>
   );

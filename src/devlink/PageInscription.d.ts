@@ -1,8 +1,7 @@
 import * as React from "react";
 import * as Types from "./types";
 
-declare function MoleculeFormInput(props: {
+declare function PageInscription(props: {
   as?: React.ElementType;
-  label?: React.ReactNode;
-  placeholder?: React.ReactNode;
+  buttonFormRuntimeProps?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

@@ -12,10 +12,14 @@ export function MoleculeCompetenceCard({
     </>
   ),
   statDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+  competenceNumberId = "field-2",
 }) {
   return (
     <_Component className={_utils.cx(_styles, "competence-card")} tag="div">
-      <_Builtin.Block tag="div">
+      <_Builtin.Block
+        className={_utils.cx(_styles, "competence-title")}
+        tag="div"
+      >
         <_Builtin.Heading tag="h3">{statTitre}</_Builtin.Heading>
         <_Builtin.Paragraph className={_utils.cx(_styles, "text-size-small")}>
           {statDescription}
@@ -25,6 +29,18 @@ export function MoleculeCompetenceCard({
         className={_utils.cx(_styles, "competence-point")}
         tag="div"
       >
+        <_Builtin.FormTextInput
+          className={_utils.cx(_styles, "input-hide")}
+          autoFocus={false}
+          maxLength={256}
+          name="competence"
+          data-name="competence"
+          placeholder="Nombre ici"
+          type="number"
+          disabled={false}
+          required={true}
+          id="competence"
+        />
         <_Builtin.Block
           className={_utils.cx(_styles, "points-card", "is-actif")}
           tag="div"

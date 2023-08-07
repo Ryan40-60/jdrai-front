@@ -1,3 +1,23 @@
+.screen-content {
+  display: flex;
+  height: 100svh;
+  padding-left: 7rem;
+  flex-direction: row;
+  flex: 1;
+}
+
+@media screen and (max-width: 991px) {
+  .screen-content {
+    flex-direction: column;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .screen-content {
+    padding-left: 5.5rem;
+  }
+}
+
 .personnages-list {
   display: flex;
   width: 100%;
@@ -34,5 +54,142 @@
 @media screen and (max-width: 767px) {
   .padding-medium {
     padding: 1.25rem;
+  }
+}
+
+.personnages-titre_wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+@media screen and (max-width: 767px) {
+  .personnages-titre_wrapper {
+    flex-direction: column;
+    grid-column-gap: 1rem;
+    grid-row-gap: 1rem;
+  }
+}
+
+.margin-top {
+  margin-right: 0rem;
+  margin-bottom: 0rem;
+  margin-left: 0rem;
+}
+
+@media screen and (max-width: 991px) {
+  .margin-top {
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .margin-top {
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .margin-top {
+    margin-right: 0rem;
+    margin-bottom: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+.margin-xsmall {
+  margin: 0.5rem;
+}
+
+.margin-bottom {
+  margin-top: 0rem;
+  margin-right: 0rem;
+  margin-left: 0rem;
+}
+
+@media screen and (max-width: 991px) {
+  .margin-bottom {
+    margin-top: 0rem;
+    margin-right: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .margin-bottom {
+    margin-top: 0rem;
+    margin-right: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .margin-bottom {
+    margin-top: 0rem;
+    margin-right: 0rem;
+    margin-left: 0rem;
+  }
+}
+
+.margin-xxsmall {
+  margin: 0.25rem;
+}
+
+.generateur-titre {
+  flex: 1;
+}
+
+.text-size-tiny {
+  font-size: 0.75rem;
+}
+
+.text-size-tiny:hover {
+  color: var(--black-729cdd37);
+}
+
+.text-size-tiny:active {
+  color: var(--tan-00f7ad81);
+}
+
+.personnages-list_wrapper {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  grid-column-gap: 3rem;
+  grid-row-gap: 3rem;
+}
+
+.margin-large {
+  margin: 3rem;
+}
+
+@media screen and (max-width: 991px) {
+  .margin-large {
+    margin: 2.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .margin-large {
+    margin: 1.5rem;
+  }
+}
+
+.margin-medium {
+  margin: 2rem;
+}
+
+@media screen and (max-width: 991px) {
+  .margin-medium {
+    margin: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .margin-medium {
+    margin: 1.25rem;
   }
 }

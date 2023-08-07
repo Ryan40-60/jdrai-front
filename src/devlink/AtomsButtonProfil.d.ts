@@ -1,9 +1,9 @@
 import * as React from "react";
 import * as Types from "./types";
 
-declare function ButtonSecondary(props: {
+declare function AtomsButtonProfil(props: {
   as?: React.ElementType;
-  buttonText?: React.ReactNode;
-  buttonLink?: Types.Basic.Link;
+  buttinIconImgPhoto?: Types.Asset.Image;
   buttonRuntimeProps?: Types.Devlink.RuntimeProps;
+  buttonLink?: Types.Basic.Link;
 }): React.JSX.Element;

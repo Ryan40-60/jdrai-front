@@ -1,3 +1,5 @@
+import "@/devlink/global.css"
+
 function App({ Component, pageProps }) {
   return (
     <div>

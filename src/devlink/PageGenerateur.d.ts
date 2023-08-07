@@ -1,5 +1,5 @@
 import * as React from "react";
 
-declare function ComponentTest(props: {
+declare function PageGenerateur(props: {
   as?: React.ElementType;
 }): React.JSX.Element;
