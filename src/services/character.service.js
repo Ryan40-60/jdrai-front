@@ -1,5 +1,12 @@
 import axiosInstance from "@/config/axios.config";
 
+/**
+ * Create a new character.
+ *
+ * @param {Object} character - Character data.
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
 export async function createCharacter(character) {
   try {
     const response = await axiosInstance.post("/character", { ...character });
@@ -9,16 +16,28 @@ export async function createCharacter(character) {
   }
 }
 
+/**
+ * List all characters.
+ *
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
 export async function listCharacters() {
   try {
     const response = await axiosInstance.get("/character");
-    console.log(response);
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to fetch characters: ", error)];
   }
 }
 
+/**
+ * Get a specific character by ID.
+ *
+ * @param {number} id - Character ID.
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
 export async function getCharacter(id) {
   try {
     const response = await axiosInstance.get(`/character/${id}`);
@@ -28,6 +47,14 @@ export async function getCharacter(id) {
   }
 }
 
+/**
+ * Update a character by ID.
+ *
+ * @param {number} id - Character ID.
+ * @param {Object} character - Updated character data.
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
 export async function updateCharacter(id, character) {
   try {
     const response = await axiosInstance.patch(`/character/${id}`, {
@@ -39,6 +66,13 @@ export async function updateCharacter(id, character) {
   }
 }
 
+/**
+ * Delete a character by ID.
+ *
+ * @param {number} id - Character ID.
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
 export async function deleteCharacter(id) {
   try {
     const response = await axiosInstance.delete(`/character/${id}`);

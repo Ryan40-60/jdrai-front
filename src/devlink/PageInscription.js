@@ -108,7 +108,7 @@ export function PageInscription({
                   </_Builtin.FormBlockLabel>
                   <_Builtin.FormTextInput
                     className={_utils.cx(_styles, "form_input")}
-                    autoFocus={true}
+                    autoFocus={false}
                     maxLength={256}
                     name="username"
                     data-name="username"
@@ -223,7 +223,7 @@ export function PageInscription({
               <_Builtin.Link
                 button={false}
                 options={{
-                  href: "/login",
+                  href: "#",
                 }}
               >
                 {"Connecte toi"}
