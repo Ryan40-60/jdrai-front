@@ -15,8 +15,7 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
     // Fetch the characters data from the API using the listCharacters service
     listCharacters()
       .then(([data, error]) => {
-        console.log({ data });
-        setCharacters(data)
+        setCharacters(data);
       })
       .catch(([data, error]) => console.log(error));
   }, []);
@@ -35,14 +34,14 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
         <OrganismPersoList
           personnagesListWrapperSlot={
             <>
-              {
-                characters?.map((character) => <MoleculePersoListCard
+              {characters?.map((character) => (
+                <MoleculePersoListCard
                   key={character.id}
                   pseudoText={character.name}
-                  classText={character.class.class}
+                  classText={character.class.type}
                   cardPersonnageLink={{ href: `/characters/${character.id}` }}
-                />)
-              }
+                />
+              ))}
             </>
           }
         />

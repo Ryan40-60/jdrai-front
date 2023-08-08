@@ -45,6 +45,8 @@ function LoginPage() {
           addToLocalStorage("user", user);
           addToLocalStorage("access", access);
           addToLocalStorage("refresh", refresh);
+
+          router.push("/characters/me");
         }
       } catch (error) {
         console.log("Error occurred while logging in:", error);

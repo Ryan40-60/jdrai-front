@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
-import { getCharacter } from "@/services/character.service";
+import { getCharacter, deleteCharacter } from "@/services/character.service";
 import Link from "next/link";
 import * as _Builtin from "@/devlink/_Builtin";
 import { GlobalStyles } from "@/devlink/GlobalStyles";
@@ -14,10 +14,27 @@ function Page({ as: _Component = _Builtin.Block }) {
   const characterId = router.query.id;
   const [character, setCharacter] = useState(null);
 
+  const deleteCurrentCharacter = () => {
+    // Show a confirmation popup
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this character?"
+    );
+    if (shouldDelete) {
+      deleteCharacter(characterId)
+        .then(([data, error]) => {
+          console.log(data);
+          router.push("/characters/me");
+        })
+        .catch(([data, error]) => console.log(error));
+    }
+  };
+
   useEffect(() => {
     // Fetch the character data from the API using the getCharacter service
     getCharacter(characterId)
-      .then(([data, error]) => setCharacter(data))
+      .then(([data, error]) => {
+        setCharacter(data);
+      })
       .catch(([data, error]) => console.log(error));
   }, [characterId]);
 
@@ -32,35 +49,36 @@ function Page({ as: _Component = _Builtin.Block }) {
           navButtonsWrapperVisibility={false}
           navLinkWrapperVisibility={false}
           navClassWrapperVisibility={true}
+          buttonWarningRuntimeProps={{ onClick: deleteCurrentCharacter }}
         />
         <OrganismDetailPerso
-          pseudo={character.name}
-          className={character.class.type}
+          pseudo={character?.name}
+          className={character?.class.type}
           backButtonLink={{
             href: "/characters/me",
           }}
         />
       </_Builtin.Block>
     </_Component>
-
-    // <div className="wrapper">
-    //   <Link href="/characters/me">My characters</Link>
-    //   <h1>Name: {character?.name}</h1>
-    //   <div>
-    //     <h2>Class: {character?.class.type}</h2>
-    //     <div>
-    //       <h4>Strength</h4>
-    //       <p>{character?.class.strength}</p>
-    //       <h4>Agility</h4>
-    //       <p>{character?.class.agility}</p>
-    //       <h4>Charisma</h4>
-    //       <p>{character?.class.charisma}</p>
-    //       <h4>Luck</h4>
-    //       <p>{character?.class.luck}</p>
-    //     </div>
-    //   </div>
-    // </div>
   );
 }
+
+// <div className="wrapper">
+//   <Link href="/characters/me">My characters</Link>
+//   <h1>Name: {character?.name}</h1>
+//   <div>
+//     <h2>Class: {character?.class.type}</h2>
+//     <div>
+//       <h4>Strength</h4>
+//       <p>{character?.class.strength}</p>
+//       <h4>Agility</h4>
+//       <p>{character?.class.agility}</p>
+//       <h4>Charisma</h4>
+//       <p>{character?.class.charisma}</p>
+//       <h4>Luck</h4>
+//       <p>{character?.class.luck}</p>
+//     </div>
+//   </div>
+// </div>
 
 export default Page;
