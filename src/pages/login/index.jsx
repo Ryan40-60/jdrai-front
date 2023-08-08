@@ -1,6 +1,6 @@
 import { login } from "@/services/auth.service";
 import { addToLocalStorage } from "@/services/localStorage.service";
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "@/context/AuthContext";
 import { PageConnexion } from "@/devlink";
@@ -8,14 +8,6 @@ import { PageConnexion } from "@/devlink";
 function LoginPage() {
   const router = useRouter();
   const { user } = useContext(AuthContext);
-
-  useEffect(() => {
-    if (user) {
-      router.push("/characters/me");
-    } else {
-      router.push("/login");
-    }
-  }, [user, router]);
 
   const [formData, setFormData] = useState({
     usernameOrEmail: "",
@@ -53,8 +45,6 @@ function LoginPage() {
           addToLocalStorage("user", user);
           addToLocalStorage("access", access);
           addToLocalStorage("refresh", refresh);
-
-          router.push("/characters/me");
         }
       } catch (error) {
         console.log("Error occurred while logging in:", error);
@@ -62,10 +52,16 @@ function LoginPage() {
     }
   };
 
+  useEffect(() => {
+    if (user) {
+      router.push("/characters/me");
+    }
+  }, [user, router]);
+
   return (
-    <PageConnexion onSubmitRuntimeProps={
-      { onChange: handleChange, onSubmit: handleSubmit }
-    } />
+    <PageConnexion
+      onSubmitRuntimeProps={{ onChange: handleChange, onSubmit: handleSubmit }}
+    />
   );
 }
 

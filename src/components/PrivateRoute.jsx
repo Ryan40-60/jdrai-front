@@ -10,7 +10,7 @@ const PrivateRoute = ({ children }) => {
     if (user) {
       router.push("/characters/me");
     } else {
-      router.push("/login");
+      router.push("/register");
     }
   }, [user, router]);
 

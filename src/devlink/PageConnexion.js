@@ -147,7 +147,7 @@ export function PageConnexion({
               <_Builtin.Link
                 button={false}
                 options={{
-                  href: "#",
+                  href: "/register",
                 }}
               >
                 {"Inscrivez-vous!"}

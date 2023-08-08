@@ -1,7 +1,6 @@
-"use client";
-
 import { PageInscription } from "@/devlink";
 import { register } from "@/services/auth.service";
+import { addToLocalStorage } from "@/services/localStorage.service";
 import React, { useState } from "react";
 
 function RegisterPage() {
@@ -14,7 +13,6 @@ function RegisterPage() {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    console.log({ target: { name, value } });
     setFormData((prevFormData) => ({
       ...prevFormData,
       [name]: value,
@@ -42,13 +40,12 @@ function RegisterPage() {
           // Handle successful registration here
           console.log("Registration successful:", userData);
 
-          // Redirect the user to a login page or any other desired page
-          // For example, redirect to the login page after successful registration
-          // You can use the Next.js Router for client-side navigation
-          // For example:
-          // import { useRouter } from "next/router";
-          // const router = useRouter();
-          // router.push("/login");
+          // Save the variables in localStorage
+          addToLocalStorage("user", user);
+          addToLocalStorage("access", access);
+          addToLocalStorage("refresh", refresh);
+
+          router.push("/characters/me");
         }
       } catch (error) {
         console.log("Error occurred while registering:", error);
@@ -57,12 +54,12 @@ function RegisterPage() {
   };
 
   return (
-    <PageInscription onSubmitFormRuntimeProps={
-      {
+    <PageInscription
+      onSubmitFormRuntimeProps={{
+        onChange: handleChange,
         onSubmit: handleSubmit,
-        onChange: handleChange
-      }
-    } />
+      }}
+    />
   );
 }
 

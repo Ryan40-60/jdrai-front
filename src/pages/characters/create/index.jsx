@@ -3,8 +3,14 @@ import CharacterImage from "@/components/CharacterImage";
 import CharacterClassSelect from "@/components/CharacterClassSelect";
 import CharacterCreationDetail from "@/components/CharacterCreationDetail";
 import { listCharacterClasses } from "@/services/characterClass.service";
+import * as _Builtin from "@/devlink/_Builtin";
+import { GlobalStyles } from "@/devlink/GlobalStyles";
+import { OrganismNav } from "@/devlink/OrganismNav";
+import { OrganismGenerateurPersonnage } from "@/devlink/OrganismGenerateurPersonnage";
+import * as _utils from "@/devlink/utils";
+import _styles from "@/devlink/PageGenerateur.module.css";
 
-function CharacterCreationPage() {
+function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
   const [characterClasses, setCharacterClasses] = useState([]);
   const [selectedClass, setSelectedClass] = useState(null);
 
@@ -35,29 +41,45 @@ function CharacterCreationPage() {
   };
 
   return (
-    <div style={{ display: "flex", height: "100%" }}>
-      <div>
-        {/* Left Block: Character Class List */}
-        <CharacterClassSelect
-          characterClasses={characterClasses}
-          selectedClass={selectedClass}
-          handleClassSelect={handleClassSelect}
+    <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
+      <GlobalStyles />
+      <_Builtin.Block
+        className={_utils.cx(_styles, "section-screen")}
+        tag="main"
+      >
+        <OrganismNav
+          navButtonsWrapperVisibility={false}
+          navLinkWrapperVisibility={false}
+          navClassWrapperVisibility={true}
+          navEditButtonsWrapperVisibility={false}
         />
-      </div>
+        <OrganismGenerateurPersonnage />
+      </_Builtin.Block>
+    </_Component>
 
-      {/* Right Block */}
-      <div>
-        {/* Top Right: Character Details */}
-        <CharacterCreationDetail
-          characterClasses={characterClasses}
-          selectedClass={selectedClass}
-        />
-      </div>
-      <div>
-        {/* Bottom Right: Character Creation */}
-        <CharacterImage selectedClass={selectedClass} />
-      </div>
-    </div>
+    // <div style={{ display: "flex", height: "100%" }}>
+    //   <div>
+    //     {/* Left Block: Character Class List */}
+    //     <CharacterClassSelect
+    //       characterClasses={characterClasses}
+    //       selectedClass={selectedClass}
+    //       handleClassSelect={handleClassSelect}
+    //     />
+    //   </div>
+
+    //   {/* Right Block */}
+    //   <div>
+    //     {/* Top Right: Character Details */}
+    //     <CharacterCreationDetail
+    //       characterClasses={characterClasses}
+    //       selectedClass={selectedClass}
+    //     />
+    //   </div>
+    //   <div>
+    //     {/* Bottom Right: Character Creation */}
+    //     <CharacterImage selectedClass={selectedClass} />
+    //   </div>
+    // </div>
   );
 }
 

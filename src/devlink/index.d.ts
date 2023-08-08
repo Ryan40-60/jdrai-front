@@ -24,6 +24,7 @@ export * from "./OrganismNav";
 export * from "./OrganismPersoList";
 export * from "./OrganismProfil";
 export * from "./PageConnexion";
+export * from "./PageDetailPerso";
 export * from "./PageGenerateur";
 export * from "./PageInscription";
 export * from "./PagePersoList";
