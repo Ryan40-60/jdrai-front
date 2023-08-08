@@ -4,6 +4,8 @@ import axios from "axios";
 // Retrieve the BASE_URL from the .env file
 const BASE_URL = "http://localhost:3000";
 
+const accessToken = fromLocalStorage("access");
+
 // Create the Axios instance with the necessary configurations
 const axiosInstance = axios.create({
   baseURL: BASE_URL,
@@ -13,14 +15,18 @@ const axiosInstance = axios.create({
   },
 });
 
-// Add an interceptor to include the authorization header
-axiosInstance.interceptors.request.use((req) => {
-  const accessToken = fromLocalStorage("access");
-  if (accessToken) {
-    req.headers["Authorization"] = `Bearer ${accessToken}`;
+axiosInstance.interceptors.request.use(
+  (config) => {
+    const accessToken = fromLocalStorage("access");
+    if (accessToken) {
+      config.headers["Authorization"] = `Bearer ${accessToken.token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-  return req;
-});
+);
 
 // Export the Axios instance
 export default axiosInstance;

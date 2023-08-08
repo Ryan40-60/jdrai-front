@@ -1,31 +1,8 @@
-import axios from "axios";
-import { fromLocalStorage } from "./localStorage.service";
-
-const BASE_URL = "http://localhost:3000";
-
-const instance = axios.create({
-  baseURL: `${BASE_URL}/character`,
-  timeout: 1000,
-  headers: { "X-Custom-Header": "foobar" },
-});
-
-// Add an interceptor to include the authorization header
-instance.interceptors.request.use(
-  (config) => {
-    const accessToken = fromLocalStorage("access");
-    if (accessToken) {
-      config.headers["Authorization"] = `Bearer ${accessToken.token}`;
-    }
-    return config;
-  },
-  (error) => {
-    return Promise.reject(error);
-  }
-);
+import axiosInstance from "@/config/axios.config";
 
 export async function createCharacter(character) {
   try {
-    const response = await instance.post("/", { ...character });
+    const response = await axiosInstance.post("/character", { ...character });
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to create character: ", error)];
@@ -34,7 +11,8 @@ export async function createCharacter(character) {
 
 export async function listCharacters() {
   try {
-    const response = await instance.get("/");
+    const response = await axiosInstance.get("/character");
+    console.log(response);
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to fetch characters: ", error)];
@@ -43,7 +21,7 @@ export async function listCharacters() {
 
 export async function getCharacter(id) {
   try {
-    const response = await instance.get(`/${id}`);
+    const response = await axiosInstance.get(`/character/${id}`);
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to fetch character: ", error)];
@@ -52,7 +30,9 @@ export async function getCharacter(id) {
 
 export async function updateCharacter(id, character) {
   try {
-    const response = await instance.patch(`/${id}`, { character });
+    const response = await axiosInstance.patch(`/character/${id}`, {
+      character,
+    });
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to update character: ", error)];
@@ -61,7 +41,7 @@ export async function updateCharacter(id, character) {
 
 export async function deleteCharacter(id) {
   try {
-    const response = await instance.delete(`/${id}`);
+    const response = await axiosInstance.delete(`/character/${id}`);
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to delete character: ", error)];
