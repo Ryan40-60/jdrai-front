@@ -1,23 +1,36 @@
-import React, { useEffect, useState } from "react";
-import CharacterImage from "@/components/CharacterImage";
-import CharacterClassSelect from "@/components/CharacterClassSelect";
-import CharacterCreationDetail from "@/components/CharacterCreationDetail";
+import React, { useEffect, useState, useContext } from "react";
+import { useRouter } from "next/router";
+import AuthContext from "@/context/AuthContext";
 import { listCharacterClasses } from "@/services/characterClass.service";
 import * as _Builtin from "@/devlink/_Builtin";
 import { GlobalStyles } from "@/devlink/GlobalStyles";
 import { OrganismNav } from "@/devlink/OrganismNav";
 import { OrganismGenerateurPersonnage } from "@/devlink/OrganismGenerateurPersonnage";
+import { AtomsNavLink } from "@/devlink/AtomsNavLink";
 import * as _utils from "@/devlink/utils";
 import _styles from "@/devlink/PageGenerateur.module.css";
 
+// CharacterCreationPage component definition
 function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
-  const [characterClasses, setCharacterClasses] = useState([]);
-  const [selectedClass, setSelectedClass] = useState(null);
+  const router = useRouter(); // Initialize router
+  const { user } = useContext(AuthContext); // Access user data from context
 
+  // Redirect to registration page if user is not logged in
+  useEffect(() => {
+    if (!user) {
+      router.push("/register");
+    }
+  }, [user, router]);
+
+  const [characterClasses, setCharacterClasses] = useState([]); // State for character classes
+  const [selectedClass, setSelectedClass] = useState(null); // State for selected class
+
+  // Fetch character classes on component mount
   useEffect(() => {
     fetchCharacterClasses();
   }, []);
 
+  // Function to fetch character classes from the API
   const fetchCharacterClasses = async () => {
     try {
       const [data, error] = await listCharacterClasses();
@@ -36,13 +49,14 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
     }
   };
 
+  // Function to handle class selection
   const handleClassSelect = (characterClass) => {
     setSelectedClass(characterClass); // Update the selectedClass state when a button is clicked
   };
 
   return (
     <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
-      <GlobalStyles />
+      <GlobalStyles /> {/* Apply global styles */}
       <_Builtin.Block
         className={_utils.cx(_styles, "section-screen")}
         tag="main"
@@ -52,34 +66,31 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
           navLinkWrapperVisibility={false}
           navClassWrapperVisibility={true}
           navEditButtonsWrapperVisibility={false}
-        />
-        <OrganismGenerateurPersonnage />
+          navActionWrapperSlot={
+            <>
+              {characterClasses?.map((characterClass) => (
+                <AtomsNavLink
+                  key={characterClass.id}
+                  navLinkRuntimeProps={handleClassSelect}
+                  navLinkText={characterClass.type}
+                  navLinkLink={{
+                    href: "#",
+                  }}
+                  navLinkIcon={`/assets/${characterClass.type}.svg`}
+                />
+              ))}
+            </>
+          }
+        />{" "}
+        {/* Navigation component */}
+        <OrganismGenerateurPersonnage
+          className={selectedClass?.type}
+          backButtonLink={{ href: "/characters/me" }}
+          pointLeft="100"
+        />{" "}
+        {/* Detail component for character generation */}
       </_Builtin.Block>
     </_Component>
-
-    // <div style={{ display: "flex", height: "100%" }}>
-    //   <div>
-    //     {/* Left Block: Character Class List */}
-    //     <CharacterClassSelect
-    //       characterClasses={characterClasses}
-    //       selectedClass={selectedClass}
-    //       handleClassSelect={handleClassSelect}
-    //     />
-    //   </div>
-
-    //   {/* Right Block */}
-    //   <div>
-    //     {/* Top Right: Character Details */}
-    //     <CharacterCreationDetail
-    //       characterClasses={characterClasses}
-    //       selectedClass={selectedClass}
-    //     />
-    //   </div>
-    //   <div>
-    //     {/* Bottom Right: Character Creation */}
-    //     <CharacterImage selectedClass={selectedClass} />
-    //   </div>
-    // </div>
   );
 }
 

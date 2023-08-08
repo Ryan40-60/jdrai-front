@@ -1,25 +1,30 @@
-import axios from "axios";
+import axiosInstance from "@/config/axios.config";
 
-const BASE_URL = "http://localhost:3000";
-
-const instance = axios.create({
-  baseURL: `${BASE_URL}/class`,
-  timeout: 1000,
-  headers: { "X-Custom-Header": "foobar" },
-});
-
+/**
+ * List all character classes.
+ *
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
 export async function listCharacterClasses() {
   try {
-    const response = await instance.get("/");
+    const response = await axiosInstance.get("/class");
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to fetch character classes: ", error)];
   }
 }
 
+/**
+ * Get a specific character class by ID.
+ *
+ * @param {number} id - Character class ID.
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
 export async function getCharacterClass(id) {
   try {
-    const response = await instance.get(`/${id}`);
+    const response = await axiosInstance.get(`/class/${id}`);
     return [response.data, null];
   } catch (error) {
     return [null, new Error("Failed to fetch character class: ", error)];
