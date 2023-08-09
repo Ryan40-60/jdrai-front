@@ -9,6 +9,9 @@ function LoginPage() {
   const router = useRouter();
   const { user, setUser, setRefreshToken, setAccessToken } =
     useContext(AuthContext);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorLabel, setErrorLabel] = useState(null);
 
   // Redirect to characters page if user is already logged in
   useEffect(() => {
@@ -24,6 +27,8 @@ function LoginPage() {
 
   // Update form data on input change
   const handleChange = (e) => {
+    setIsError(false);
+    setIsSuccess(false);
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -43,11 +48,15 @@ function LoginPage() {
       try {
         const [userData, userError] = await login(formData);
         if (userError) {
+          // alert(userError.data.message);
+          setIsError(true);
+          setErrorLabel(userError.data.message);
           console.log("Login failed:", userError);
         } else {
           // Handle successful login here
           console.log("Logged in successfully:", userData);
 
+          setIsSuccess(true);
           // Extract the required variables from the user data
           const { user, access, refresh } = userData;
 
@@ -70,6 +79,10 @@ function LoginPage() {
   return (
     <PageConnexion
       onSubmitRuntimeProps={{ onChange: handleChange, onSubmit: handleSubmit }}
+      isError={isError}
+      isSuccess={isSuccess}
+      errorChipLabel={errorLabel}
+      successChipLabel={"Connexion réussie"}
     />
   );
 }

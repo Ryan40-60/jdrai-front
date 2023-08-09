@@ -11,7 +11,7 @@ export async function listCharacterClasses() {
     const response = await axiosInstance.get("/class");
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to fetch character classes: ", error)];
+    return [null, error.response];
   }
 }
 
@@ -27,6 +27,6 @@ export async function getCharacterClass(id) {
     const response = await axiosInstance.get(`/class/${id}`);
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to fetch character class: ", error)];
+    return [null, error.response];
   }
 }

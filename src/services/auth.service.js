@@ -38,7 +38,7 @@ export async function login(data) {
     const response = await axiosInstance.post("/auth/login", body);
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to log user: ", error)];
+    return [null, error.response];
   }
 }
 
@@ -53,6 +53,6 @@ export async function logout() {
     const response = await axiosInstance.post("/auth/logout");
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to logout user: ", error)];
+    return [null, error.response];
   }
 }
