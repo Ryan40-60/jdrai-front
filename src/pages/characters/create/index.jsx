@@ -25,6 +25,30 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
   const [characterClasses, setCharacterClasses] = useState([]); // State for character classes
   const [selectedClass, setSelectedClass] = useState(null); // State for selected class
 
+  const competences = ["Force", "Agilité", "Charisme", "Chance"];
+
+  // const character = body;
+
+  // Function to handle user logout
+  const logoutUser = () => {
+    const shouldLogout = window.confirm(
+      "Êtes-vous sûr de vouloir vous déconnecter ?"
+    );
+    if (shouldLogout) {
+      logout().then(([data, error]) => {
+        console.log(data);
+
+        // Clear tokens and user data from local storage
+        removeFromLocalStorage("user");
+        removeFromLocalStorage("access");
+        removeFromLocalStorage("refresh");
+        setUser(null);
+        setAccessToken(null);
+        setRefreshToken(null);
+      });
+    }
+  };
+
   // Fetch character classes on component mount
   useEffect(() => {
     fetchCharacterClasses();
@@ -62,20 +86,19 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
         tag="main"
       >
         <OrganismNav
-          navButtonsWrapperVisibility={false}
+          navButtonsWrapperVisibility={true}
           navLinkWrapperVisibility={false}
           navClassWrapperVisibility={true}
           navEditButtonsWrapperVisibility={false}
+          disconnectRuntimeProps={{ onClick: logoutUser }}
+          profilLink={{ href: "/profil" }}
           navActionWrapperSlot={
             <>
               {characterClasses?.map((characterClass) => (
                 <AtomsNavLink
                   key={characterClass.id}
-                  navLinkRuntimeProps={handleClassSelect}
+                  navLinkRuntimeProps={{ onClick: handleClassSelect }}
                   navLinkText={characterClass.type}
-                  navLinkLink={{
-                    href: "#",
-                  }}
                   navLinkIcon={`/assets/${characterClass.type}.svg`}
                 />
               ))}

@@ -79,6 +79,7 @@ function LoginPage() {
   return (
     <PageConnexion
       onSubmitRuntimeProps={{ onChange: handleChange, onSubmit: handleSubmit }}
+      inscriptionLink={{ href: "/register" }}
       isError={isError}
       isSuccess={isSuccess}
       errorChipLabel={errorLabel}

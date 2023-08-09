@@ -8,9 +8,8 @@ import _styles from "./PagePersoList.module.css";
 
 export function PagePersoList({
   as: _Component = _Builtin.Block,
-  disconnect = {},
-  navLinkWrapperVisibility = true,
-  navActionWrapperVisibility = false,
+  disconnectRuntimeProps = {},
+  creerPersonnageLink = {},
 }) {
   return (
     <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
@@ -20,11 +19,15 @@ export function PagePersoList({
         tag="main"
       >
         <OrganismNav
+          disconnectRuntimeProps={disconnectRuntimeProps}
           navClassWrapperVisibility={false}
           navLinkWrapperVisibility={true}
           navEditButtonsWrapperVisibility={false}
+          mondeLink={{
+            href: "#",
+          }}
         />
-        <OrganismPersoList />
+        <OrganismPersoList creerPersonnageLink={creerPersonnageLink} />
       </_Builtin.Block>
     </_Component>
   );

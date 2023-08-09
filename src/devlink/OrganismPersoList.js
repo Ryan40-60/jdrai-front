@@ -8,6 +8,9 @@ import _styles from "./OrganismPersoList.module.css";
 export function OrganismPersoList({
   as: _Component = _Builtin.Block,
   personnagesListWrapperSlot,
+  creerPersonnageLink = {
+    href: "#",
+  },
 }) {
   return (
     <_Component className={_utils.cx(_styles, "screen-content")} tag="div">
@@ -45,8 +48,8 @@ export function OrganismPersoList({
             </_Builtin.Heading>
           </_Builtin.Block>
           <AtomsButtonMain
+            buttonLink={creerPersonnageLink}
             buttonMainText="Créer un personnage"
-            buttonMainRuntimeProps={{}}
           />
         </_Builtin.Block>
         <_Builtin.Block

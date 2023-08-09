@@ -1,6 +1,9 @@
 import React, { useEffect, useContext } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "@/context/AuthContext";
+import { deleteAuthenticatedUser } from "@/services/user.service";
+import { logout } from "@/services/auth.service";
+import { removeFromLocalStorage } from "@/services/localStorage.service";
 import * as _Builtin from "@/devlink/_Builtin";
 import { GlobalStyles } from "@/devlink/GlobalStyles";
 import { OrganismNav } from "@/devlink/OrganismNav";
@@ -10,14 +13,59 @@ import _styles from "@/devlink/PageProfil.module.css";
 
 function PageProfil({ as: _Component = _Builtin.Block }) {
   const router = useRouter();
-  const { user } = useContext(AuthContext);
+  const { user, setUser, setAccessToken, setRefreshToken } =
+    useContext(AuthContext);
 
   // Redirect to registration page if user is not logged in
   useEffect(() => {
     if (!user) {
-      router.push("/register");
+      router.push("/login");
     }
   }, [user, router]);
+
+  const deleteAccount = () => {
+    const shouldDelete1 = window.confirm(
+      "Êtes-vous sûr de vouloir supprimer votre compte ?"
+    );
+    if (shouldDelete1) {
+      const shouldDelete2 = window.confirm(
+        "Votre compte ne pourra pas être récupéré. Voulez-vous continuer ?"
+      );
+      if (shouldDelete2) {
+        deleteAuthenticatedUser().then(([data, error]) => {
+          console.log(data);
+
+          // Clear tokens and user data from local storage
+          removeFromLocalStorage("user");
+          removeFromLocalStorage("access");
+          removeFromLocalStorage("refresh");
+          setUser(null);
+          setAccessToken(null);
+          setRefreshToken(null);
+        });
+      }
+    }
+  };
+
+  // Function to handle user logout
+  const logoutUser = () => {
+    const shouldLogout = window.confirm(
+      "Êtes-vous sûr de vouloir vous déconnecter ?"
+    );
+    if (shouldLogout) {
+      logout().then(([data, error]) => {
+        console.log(data);
+
+        // Clear tokens and user data from local storage
+        removeFromLocalStorage("user");
+        removeFromLocalStorage("access");
+        removeFromLocalStorage("refresh");
+        setUser(null);
+        setAccessToken(null);
+        setRefreshToken(null);
+      });
+    }
+  };
 
   return (
     <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
@@ -30,8 +78,12 @@ function PageProfil({ as: _Component = _Builtin.Block }) {
           navClassWrapperVisibility={false}
           navLinkWrapperVisibility={true}
           navEditButtonsWrapperVisibility={false}
+          buttonWarningRuntimeProps={{ onClick: logoutUser }}
+          mesPersonnagesLink={{ href: "/characters/me" }}
         />
-        <OrganismProfil /> {/* Display user profile */}
+        <OrganismProfil
+          supprimerCompteRuntimeProps={{ onClick: deleteAccount }}
+        />
       </_Builtin.Block>
     </_Component>
   );

@@ -67,7 +67,8 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
           navButtonsWrapperVisibility={true}
           navLinkWrapperVisibility={false}
           navEditButtonsWrapperVisibility={false}
-          buttonWarningRuntimeProps={{ onClick: logoutUser }} // Attach logout function
+          disconnectRuntimeProps={{ onClick: logoutUser }}
+          profilLink={{ href: "/profil" }}
         />
         <OrganismPersoList
           personnagesListWrapperSlot={
@@ -83,6 +84,7 @@ function CharactersPage({ as: _Component = _Builtin.Block }) {
               ))}
             </>
           }
+          creerPersonnageLink={{ href: "create" }}
         />
       </_Builtin.Block>
     </_Component>

@@ -4,6 +4,6 @@ import * as Types from "./types";
 declare function AtomsButtonMain(props: {
   as?: React.ElementType;
   buttonMainText?: React.ReactNode;
-  buttonMainLink?: Types.Basic.Link;
+  buttonLink?: Types.Basic.Link;
   buttonMainRuntimeProps?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

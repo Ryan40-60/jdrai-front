@@ -3,7 +3,10 @@ import * as _Builtin from "./_Builtin";
 import * as _utils from "./utils";
 import _styles from "./OrganismProfil.module.css";
 
-export function OrganismProfil({ as: _Component = _Builtin.Block }) {
+export function OrganismProfil({
+  as: _Component = _Builtin.Block,
+  supprimerCompteRuntimeProps = {},
+}) {
   return (
     <_Component className={_utils.cx(_styles, "screen-content")} tag="div">
       <_Builtin.Block
@@ -45,6 +48,7 @@ export function OrganismProfil({ as: _Component = _Builtin.Block }) {
             options={{
               href: "#",
             }}
+            {...supprimerCompteRuntimeProps}
           >
             {"Supprimer mon compte"}
           </_Builtin.Link>

@@ -7,7 +7,7 @@ export function AtomsButtonMain({
   as: _Component = _Builtin.Link,
   buttonMainText = "Button Text",
 
-  buttonMainLink = {
+  buttonLink = {
     href: "#",
   },
 
@@ -17,7 +17,7 @@ export function AtomsButtonMain({
     <_Component
       className={_utils.cx(_styles, "button")}
       button={true}
-      options={buttonMainLink}
+      options={buttonLink}
       {...buttonMainRuntimeProps}
     >
       {buttonMainText}

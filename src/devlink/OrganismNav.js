@@ -12,13 +12,29 @@ export function OrganismNav({
   navLogo = "https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce097c9c11711e17594ce0_logo.svg",
   navActionWrapperSlot,
   navLinkWrapperSlot,
-  handleClassSelect = {},
-  buttonWarningRuntimeProps = {},
+  deleteRuntimeProps = {},
   navClassWrapperVisibility = true,
   navButtonsWrapperVisibility = true,
   navLinkWrapperVisibility = false,
-  buttonRuntimeProps = {},
   navEditButtonsWrapperVisibility = true,
+
+  mondeLink = {
+    href: "#",
+  },
+
+  mesPersonnagesLink = {
+    href: "#",
+  },
+
+  profilLink = {
+    href: "#",
+  },
+
+  chooseClassMageRuntimeProps = {},
+  chooseClassGuerrierRuntimeProps = {},
+  chooseClassArcherRuntimeProps = {},
+  chooseClassVoleurRuntimeProps = {},
+  disconnectRuntimeProps = {},
 }) {
   return (
     <_Component
@@ -41,42 +57,7 @@ export function OrganismNav({
             className={_utils.cx(_styles, "nav-action_wrapper")}
             tag="div"
           >
-            {navActionWrapperSlot ?? (
-              <>
-                <AtomsNavLink
-                  navLinkRuntimeProps={handleClassSelect}
-                  navLinkText="Mage"
-                  navLinkLink={{
-                    href: "#",
-                  }}
-                  navLinkIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce097d9e1879e4a8216e19_magic.svg"
-                />
-                <AtomsNavLink
-                  navLinkRuntimeProps={handleClassSelect}
-                  navLinkText="Voleur"
-                  navLinkLink={{
-                    href: "#",
-                  }}
-                  navLinkIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce097d9e1879e4a8216e0a_gem.svg"
-                />
-                <AtomsNavLink
-                  navLinkRuntimeProps={handleClassSelect}
-                  navLinkText="Archer"
-                  navLinkLink={{
-                    href: "#",
-                  }}
-                  navLinkIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce097c68cb8c8447462e72_bow.svg"
-                />
-                <AtomsNavLink
-                  navLinkRuntimeProps={handleClassSelect}
-                  navLinkText="Guerrier"
-                  navLinkLink={{
-                    href: "#",
-                  }}
-                  navLinkIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce097cd5dcc1f6fde91d0f_sword.svg"
-                />
-              </>
-            )}
+            {navActionWrapperSlot ?? <></>}
           </_Builtin.Block>
         ) : null}
         {navLinkWrapperVisibility ? (
@@ -87,16 +68,8 @@ export function OrganismNav({
             {navLinkWrapperSlot ?? (
               <>
                 <AtomsNavLink
+                  navLinkLink={mesPersonnagesLink}
                   navLinkText="Perso"
-                  navLinkLink={{
-                    href: "#",
-                  }}
-                />
-                <AtomsNavLink
-                  navLinkText="Monde"
-                  navLinkLink={{
-                    href: "#",
-                  }}
                 />
               </>
             )}
@@ -108,10 +81,10 @@ export function OrganismNav({
             tag="div"
           >
             <AtomsButtonIconWarning
-              buttonWarningRuntimeProps={buttonWarningRuntimeProps}
+              buttonWarningRuntimeProps={deleteRuntimeProps}
               buttonWarningIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce1785090550f27ad94614_Delete.svg"
             />
-            <AtomsButtonIcon buttonRuntimeProps={buttonRuntimeProps} />
+            <AtomsButtonIcon />
           </_Builtin.Block>
         ) : null}
         {navButtonsWrapperVisibility ? (
@@ -119,9 +92,9 @@ export function OrganismNav({
             className={_utils.cx(_styles, "nav-buttons_wrapper")}
             tag="div"
           >
-            <AtomsButtonProfil />
+            <AtomsButtonProfil buttonLink={profilLink} />
             <AtomsButtonIconWarning
-              buttonWarningRuntimeProps={buttonWarningRuntimeProps}
+              buttonWarningRuntimeProps={disconnectRuntimeProps}
               buttonWarningIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce3a7a31615eaba34b78ef_Exit%20to%20app.svg"
             />
           </_Builtin.Block>

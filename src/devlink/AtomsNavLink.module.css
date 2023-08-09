@@ -17,6 +17,10 @@
   text-decoration: none;
 }
 
+.nav-link.background-color-card:hover {
+  color: hsla(42.10526315789474, 0.00%, 100.00%, 1.00);
+}
+
 .nav-link.background-color-card:global(.w--current) {
   opacity: 1;
 }

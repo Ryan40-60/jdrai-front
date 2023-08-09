@@ -4,6 +4,11 @@ import AuthContext from "@/context/AuthContext";
 import { register } from "@/services/auth.service";
 import { addToLocalStorage } from "@/services/localStorage.service";
 import { PageInscription } from "@/devlink";
+import * as _Builtin from "@/devlink/_Builtin";
+import * as _interactions from "@/devlink/interactions";
+import { GlobalStyles } from "@/devlink/GlobalStyles";
+import * as _utils from "@/devlink/utils";
+import _styles from "@/devlink/PageInscription.module.css";
 
 function RegisterPage() {
   const router = useRouter();
@@ -79,6 +84,7 @@ function RegisterPage() {
         onChange: handleChange,
         onSubmit: handleSubmit,
       }}
+      connexionLink={{ href: "/login" }}
     />
   );
 }

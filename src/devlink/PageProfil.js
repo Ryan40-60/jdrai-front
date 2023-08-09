@@ -6,7 +6,11 @@ import { OrganismProfil } from "./OrganismProfil";
 import * as _utils from "./utils";
 import _styles from "./PageProfil.module.css";
 
-export function PageProfil({ as: _Component = _Builtin.Block }) {
+export function PageProfil({
+  as: _Component = _Builtin.Block,
+  supprimerCompteRuntimeProps = {},
+  disconnectRuntimeProps = {},
+}) {
   return (
     <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
       <GlobalStyles />
@@ -15,11 +19,14 @@ export function PageProfil({ as: _Component = _Builtin.Block }) {
         tag="main"
       >
         <OrganismNav
+          disconnectRuntimeProps={disconnectRuntimeProps}
           navClassWrapperVisibility={false}
           navLinkWrapperVisibility={true}
           navEditButtonsWrapperVisibility={false}
         />
-        <OrganismProfil />
+        <OrganismProfil
+          supprimerCompteRuntimeProps={supprimerCompteRuntimeProps}
+        />
       </_Builtin.Block>
     </_Component>
   );

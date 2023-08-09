@@ -6,7 +6,11 @@ import { OrganismDetailPerso } from "./OrganismDetailPerso";
 import * as _utils from "./utils";
 import _styles from "./PageDetailPerso.module.css";
 
-export function PageDetailPerso({ as: _Component = _Builtin.Block }) {
+export function PageDetailPerso({
+  as: _Component = _Builtin.Block,
+  deleteRuntimeProps = {},
+  editRuntimeProps = {},
+}) {
   return (
     <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
       <GlobalStyles />
@@ -15,6 +19,7 @@ export function PageDetailPerso({ as: _Component = _Builtin.Block }) {
         tag="main"
       >
         <OrganismNav
+          deleteRuntimeProps={deleteRuntimeProps}
           navButtonsWrapperVisibility={false}
           navLinkWrapperVisibility={false}
           navClassWrapperVisibility={true}

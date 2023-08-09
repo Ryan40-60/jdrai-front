@@ -3,7 +3,6 @@ import * as Types from "./types";
 
 declare function PagePersoList(props: {
   as?: React.ElementType;
-  disconnect?: Types.Devlink.RuntimeProps;
-  navLinkWrapperVisibility?: Types.Visibility.VisibilityConditions;
-  navActionWrapperVisibility?: Types.Visibility.VisibilityConditions;
+  disconnectRuntimeProps?: Types.Devlink.RuntimeProps;
+  creerPersonnageRuntimeProps?: Types.Devlink.RuntimeProps;
 }): React.JSX.Element;

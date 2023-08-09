@@ -60,7 +60,7 @@ function Page({ as: _Component = _Builtin.Block }) {
           navButtonsWrapperVisibility={false}
           navLinkWrapperVisibility={false}
           navClassWrapperVisibility={false}
-          buttonWarningRuntimeProps={{ onClick: deleteCurrentCharacter }}
+          deleteRuntimeProps={{ onClick: deleteCurrentCharacter }}
         />{" "}
         {/* Navigation component */}
         <OrganismDetailPerso
