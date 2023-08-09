@@ -12,7 +12,7 @@ export async function createCharacter(character) {
     const response = await axiosInstance.post("/character", { ...character });
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to create character: ", error)];
+    return [null, error.response];
   }
 }
 
@@ -27,7 +27,7 @@ export async function listCharacters() {
     const response = await axiosInstance.get("/character");
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to fetch characters: ", error)];
+    return [null, error.response];
   }
 }
 
@@ -43,7 +43,7 @@ export async function getCharacter(id) {
     const response = await axiosInstance.get(`/character/${id}`);
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to fetch character: ", error)];
+    return [null, error.response];
   }
 }
 
@@ -62,7 +62,7 @@ export async function updateCharacter(id, character) {
     });
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to update character: ", error)];
+    return [null, error.response];
   }
 }
 
@@ -78,6 +78,6 @@ export async function deleteCharacter(id) {
     const response = await axiosInstance.delete(`/character/${id}`);
     return [response.data, null];
   } catch (error) {
-    return [null, new Error("Failed to delete character: ", error)];
+    return [null, error.response];
   }
 }
