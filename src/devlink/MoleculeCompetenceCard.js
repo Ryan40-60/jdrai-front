@@ -12,7 +12,10 @@ export function MoleculeCompetenceCard({
     </>
   ),
   statDescription = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
-  competenceNumberId = "field-2",
+  competenceNumberId = "",
+  competenceRuntimeProps = {},
+  isDisabled = false,
+  skillValue = "",
 }) {
   return (
     <_Component className={_utils.cx(_styles, "competence-card")} tag="div">
@@ -33,13 +36,15 @@ export function MoleculeCompetenceCard({
           className={_utils.cx(_styles, "input-hide")}
           autoFocus={false}
           maxLength={256}
-          name="competence"
-          data-name="competence"
-          placeholder="Nombre ici"
+          name={`competence${competenceNumberId}`}
+          data-name={`competence${competenceNumberId}`}
+          value={skillValue}
+          placeholder="0"
           type="number"
-          disabled={false}
+          disabled={isDisabled}
           required={true}
-          id="competence"
+          id={competenceNumberId}
+          {...competenceRuntimeProps}
         />
         <_Builtin.Block
           className={_utils.cx(_styles, "points-card", "is-actif")}

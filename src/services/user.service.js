@@ -1,6 +1,22 @@
 import axiosInstance from "@/config/axios.config";
 
 /**
+ * Get an authenticated user.
+ *
+ * @param {Object} user - Get user data.
+ * @return {Promise<[Object, Error|null]>} A promise that resolves to an array
+ * containing the response data or null and an error object or null.
+ */
+export async function getAuthenticatedUser(user) {
+  try {
+    const response = await axiosInstance.get("/user/me", {});
+    return [response.data, null];
+  } catch (error) {
+    return [null, error.response];
+  }
+}
+
+/**
  * Update an authenticated user.
  *
  * @param {Object} user - Updated user data.

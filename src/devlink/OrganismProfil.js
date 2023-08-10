@@ -6,6 +6,8 @@ import _styles from "./OrganismProfil.module.css";
 export function OrganismProfil({
   as: _Component = _Builtin.Block,
   supprimerCompteRuntimeProps = {},
+  username = "",
+  userEmail = "",
 }) {
   return (
     <_Component className={_utils.cx(_styles, "screen-content")} tag="div">
@@ -31,12 +33,6 @@ export function OrganismProfil({
             className={_utils.cx(_styles, "generateur-titre")}
             tag="div"
           >
-            <_Builtin.Block
-              className={_utils.cx(_styles, "text-size-tiny")}
-              tag="div"
-            >
-              {"paramètre"}
-            </_Builtin.Block>
             <_Builtin.Heading tag="h2">
               {"Mon profil"}
               <br />
@@ -68,7 +64,7 @@ export function OrganismProfil({
               >
                 <_Builtin.FormBlockLabel
                   className={_utils.cx(_styles, "text-size-regular")}
-                  htmlFor="identifiant-3"
+                  htmlFor="username"
                 >
                   {"Pseudo"}
                 </_Builtin.FormBlockLabel>
@@ -76,13 +72,12 @@ export function OrganismProfil({
                   className={_utils.cx(_styles, "form_input")}
                   autoFocus={false}
                   maxLength={256}
-                  name="identifiant-2"
-                  data-name="Identifiant 2"
-                  placeholder="Votre pseudo ou email..."
+                  name="username"
+                  data-name="username"
+                  value={username}
                   type="text"
-                  disabled={false}
-                  required={true}
-                  id="identifiant-2"
+                  disabled={true}
+                  id="username"
                 />
               </_Builtin.Block>
               <_Builtin.Block
@@ -91,7 +86,7 @@ export function OrganismProfil({
               >
                 <_Builtin.FormBlockLabel
                   className={_utils.cx(_styles, "text-size-regular")}
-                  htmlFor="identifiant-3"
+                  htmlFor="email"
                 >
                   {"Email"}
                 </_Builtin.FormBlockLabel>
@@ -99,39 +94,37 @@ export function OrganismProfil({
                   className={_utils.cx(_styles, "form_input")}
                   autoFocus={false}
                   maxLength={256}
-                  name="identifiant-2"
-                  data-name="Identifiant 2"
-                  placeholder="Votre pseudo ou email..."
+                  name="email"
+                  data-name="email"
+                  value={userEmail}
                   type="text"
-                  disabled={false}
-                  required={true}
-                  id="identifiant-2"
+                  disabled={true}
+                  required={false}
+                  id="email"
                 />
               </_Builtin.Block>
               <_Builtin.Block
                 className={_utils.cx(_styles, "input-wrapper")}
                 tag="div"
-              >
-                <_Builtin.FormBlockLabel
-                  className={_utils.cx(_styles, "text-size-regular")}
-                  htmlFor="identifiant-3"
-                >
-                  {"Password"}
-                </_Builtin.FormBlockLabel>
-                <_Builtin.FormTextInput
-                  className={_utils.cx(_styles, "form_input")}
-                  autoFocus={false}
-                  maxLength={256}
-                  name="identifiant-2"
-                  data-name="Identifiant 2"
-                  placeholder="Votre pseudo ou email..."
-                  type="text"
-                  disabled={false}
-                  required={true}
-                  id="identifiant-2"
-                />
-              </_Builtin.Block>
+              ></_Builtin.Block>
             </_Builtin.FormForm>
+            <_Builtin.Block
+              className={_utils.cx(_styles, "link-about-container")}
+              tag="div"
+            >
+              <_Builtin.Link
+                className={_utils.cx(_styles, "back-button")}
+                button={false}
+                options={{ href: "/about" }}
+              >
+                <_Builtin.Block
+                  className={_utils.cx(_styles, "text-size-regular")}
+                  tag="div"
+                >
+                  {"À propos de nous"}
+                </_Builtin.Block>
+              </_Builtin.Link>
+            </_Builtin.Block>
             <_Builtin.FormSuccessMessage>
               <_Builtin.Block tag="div">
                 {"Thank you! Your submission has been received!"}

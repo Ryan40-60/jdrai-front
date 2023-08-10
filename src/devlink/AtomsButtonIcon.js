@@ -6,14 +6,13 @@ import _styles from "./AtomsButtonIcon.module.css";
 export function AtomsButtonIcon({
   as: _Component = _Builtin.Link,
   buttonRuntimeProps = {},
+  editLink = { href: "#" },
 }) {
   return (
     <_Component
       className={_utils.cx(_styles, "button", "is-icon")}
       button={false}
-      options={{
-        href: "#",
-      }}
+      options={editLink}
       {...buttonRuntimeProps}
     >
       <_Builtin.Image

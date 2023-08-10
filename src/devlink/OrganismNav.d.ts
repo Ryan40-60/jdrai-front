@@ -14,6 +14,7 @@ declare function OrganismNav(props: {
   mondeLink?: Types.Basic.Link;
   mesPersonnagesLink?: Types.Basic.Link;
   profilLink?: Types.Basic.Link;
+  editLink?: Types.Basic.Link;
   chooseClassMageRuntimeProps?: Types.Devlink.RuntimeProps;
   chooseClassGuerrierRuntimeProps?: Types.Devlink.RuntimeProps;
   chooseClassArcherRuntimeProps?: Types.Devlink.RuntimeProps;

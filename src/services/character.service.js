@@ -58,7 +58,7 @@ export async function getCharacter(id) {
 export async function updateCharacter(id, character) {
   try {
     const response = await axiosInstance.patch(`/character/${id}`, {
-      character,
+      ...character,
     });
     return [response.data, null];
   } catch (error) {

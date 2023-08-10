@@ -1,7 +1,10 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import { useRouter } from "next/router";
 import AuthContext from "@/context/AuthContext";
-import { deleteAuthenticatedUser } from "@/services/user.service";
+import {
+  deleteAuthenticatedUser,
+  getAuthenticatedUser,
+} from "@/services/user.service";
 import { logout } from "@/services/auth.service";
 import { removeFromLocalStorage } from "@/services/localStorage.service";
 import * as _Builtin from "@/devlink/_Builtin";
@@ -15,6 +18,8 @@ function PageProfil({ as: _Component = _Builtin.Block }) {
   const router = useRouter();
   const { user, setUser, setAccessToken, setRefreshToken } =
     useContext(AuthContext);
+  const [username, setUsername] = useState(null);
+  const [email, setEmail] = useState(null);
 
   // Redirect to registration page if user is not logged in
   useEffect(() => {
@@ -67,6 +72,11 @@ function PageProfil({ as: _Component = _Builtin.Block }) {
     }
   };
 
+  useEffect(() => {
+    setUsername(user?.username);
+    setEmail(user?.email);
+  }, [user]);
+
   return (
     <_Component className={_utils.cx(_styles, "page-wrapper")} tag="div">
       <GlobalStyles /> {/* Apply global styles */}
@@ -78,11 +88,13 @@ function PageProfil({ as: _Component = _Builtin.Block }) {
           navClassWrapperVisibility={false}
           navLinkWrapperVisibility={true}
           navEditButtonsWrapperVisibility={false}
-          buttonWarningRuntimeProps={{ onClick: logoutUser }}
+          disconnectRuntimeProps={{ onClick: logoutUser }}
           mesPersonnagesLink={{ href: "/characters/me" }}
         />
         <OrganismProfil
           supprimerCompteRuntimeProps={{ onClick: deleteAccount }}
+          userEmail={email}
+          username={username}
         />
       </_Builtin.Block>
     </_Component>

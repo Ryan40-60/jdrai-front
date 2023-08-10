@@ -104,24 +104,7 @@ export function OrganismDetailPerso({
             <_Builtin.Block
               className={_utils.cx(_styles, "div-block")}
               tag="div"
-            >
-              <_Builtin.Block
-                className={_utils.cx(_styles, "points-icon")}
-                tag="div"
-              />
-              <_Builtin.Block
-                className={_utils.cx(_styles, "text-size-small")}
-                tag="div"
-              >
-                {pointLeft}
-              </_Builtin.Block>
-              <_Builtin.Block
-                className={_utils.cx(_styles, "text-size-small")}
-                tag="div"
-              >
-                {"points restants"}
-              </_Builtin.Block>
-            </_Builtin.Block>
+            ></_Builtin.Block>
           </_Builtin.Block>
           <_Builtin.Block
             className={_utils.cx(

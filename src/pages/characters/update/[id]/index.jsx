@@ -4,6 +4,7 @@ import AuthContext from "@/context/AuthContext";
 import { logout } from "@/services/auth.service";
 import { removeFromLocalStorage } from "@/services/localStorage.service";
 import { listCharacterClasses } from "@/services/characterClass.service";
+import { getCharacter } from "@/services/character.service";
 import * as _Builtin from "@/devlink/_Builtin";
 import { GlobalStyles } from "@/devlink/GlobalStyles";
 import { OrganismNav } from "@/devlink/OrganismNav";
@@ -12,13 +13,15 @@ import { AtomsNavLink } from "@/devlink/AtomsNavLink";
 import { MoleculeCompetenceCard } from "@/devlink/MoleculeCompetenceCard";
 import * as _utils from "@/devlink/utils";
 import _styles from "@/devlink/PageGenerateur.module.css";
-import { createCharacter } from "@/services/character.service";
+import { updateCharacter } from "@/services/character.service";
 
 // CharacterCreationPage component definition
 function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
   const router = useRouter(); // Initialize router
   const { user, setUser, setRefreshToken, setAccessToken } =
     useContext(AuthContext);
+  const characterId = router.query.id;
+  const skills = ["strength", "agility", "charisma", "luck"];
 
   // Redirect to registration page if user is not logged in
   useEffect(() => {
@@ -29,7 +32,9 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
 
   const [characterClasses, setCharacterClasses] = useState([]); // State for character classes
   const [selectedClass, setSelectedClass] = useState(null); // State for selected class
-  const [pool, setPool] = useState(100); // State for skill points
+  const [character, setCharacter] = useState(null); // State for selected class
+  const [pool, setPool] = useState(0); // State for skill points
+  const [currentName, setName] = useState("");
 
   const [competences, setCompetences] = useState([
     { id: "0", type: "Force", value: 0 },
@@ -39,10 +44,10 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
   ]);
 
   const [formData, setFormData] = useState({
-    competence0: "0",
-    competence1: "0",
-    competence2: "0",
-    competence3: "0",
+    competence0: "",
+    competence1: "",
+    competence2: "",
+    competence3: "",
     pseudo: "",
   });
 
@@ -105,7 +110,7 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const characterBody = {
+    const updatedCharacterBody = {
       characterClassId: selectedClass.id,
       name: formData.pseudo,
       strength: formData.competence0,
@@ -113,11 +118,14 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
       charisma: formData.competence2,
       luck: formData.competence3,
     };
-    const [characterData, error] = await createCharacter(characterBody);
+    const [updatedCharacterData, error] = await updateCharacter(
+      characterId,
+      updatedCharacterBody
+    );
     if (error) {
       console.log(error);
     } else {
-      router.push(`/characters/${characterData.id}`);
+      router.push(`/characters/${character.id}`);
     }
   };
 
@@ -125,6 +133,24 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
   useEffect(() => {
     fetchCharacterClasses();
   }, []);
+
+  useEffect(() => {
+    getCharacter(characterId)
+      .then(([data, error]) => {
+        setCharacter(data);
+      })
+      .catch(([data, error]) => console.log(error));
+  }, [characterId]);
+
+  useEffect(() => {
+    setName(character?.name);
+    setCompetences([
+      { id: "0", type: "Force", value: character?.strength },
+      { id: "1", type: "Agilité", value: character?.agility },
+      { id: "2", type: "Charisme", value: character?.charisma },
+      { id: "3", type: "Chance", value: character?.luck },
+    ]);
+  }, [character]);
 
   // Function to fetch character classes from the API
   const fetchCharacterClasses = async () => {
@@ -134,15 +160,43 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
         throw new Error(error);
       }
       setCharacterClasses(data);
-
-      // Set the initial selected class to the first class if available
-      if (data.length > 0) {
-        setSelectedClass(data[0]);
-      }
     } catch (error) {
       // Handle the error, e.g., show an error message or log the error
       console.error("Error fetching character classes:", error);
     }
+  };
+
+  useEffect(() => {
+    if (characterClasses.length > 0) {
+      setSelectedClass(
+        characterClasses.find(
+          (characterClass) => characterClass.id === character?.id_characterClass
+        )
+      );
+    }
+  }, [character, characterClasses]);
+
+  useEffect(() => {
+    setFormData({
+      competence0: character?.strength,
+      competence1: character?.agility,
+      competence2: character?.charisma,
+      competence3: character?.luck,
+      pseudo: character?.name,
+    });
+  }, [character]);
+
+  useEffect(() => {
+    setPool(
+      formData.competence0 +
+        formData.competence1 +
+        formData.competence2 +
+        formData.competence3
+    );
+  }, [formData]);
+
+  const handleName = (e) => {
+    setName(e.target.value);
   };
 
   // Function to handle class selection
@@ -184,7 +238,9 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
           className={selectedClass?.type}
           backButtonLink={{ href: "/characters/me" }}
           pointLeft={pool}
-          isUpdate={false}
+          currentName={currentName}
+          nameRuntimeProps={{ onChange: handleName }}
+          isUpdate={true}
           onSubmitRuntimeProps={{
             onChange: handleChange,
             onSubmit: handleSubmit,

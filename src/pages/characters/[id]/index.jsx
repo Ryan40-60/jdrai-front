@@ -4,6 +4,7 @@ import AuthContext from "@/context/AuthContext";
 import { getCharacter, deleteCharacter } from "@/services/character.service";
 import * as _Builtin from "@/devlink/_Builtin";
 import { GlobalStyles } from "@/devlink/GlobalStyles";
+import { MoleculeCompetenceCard } from "@/devlink/MoleculeCompetenceCard";
 import { OrganismDetailPerso } from "@/devlink/OrganismDetailPerso";
 import { OrganismNav } from "@/devlink/OrganismNav";
 import * as _utils from "@/devlink/utils";
@@ -23,6 +24,21 @@ function Page({ as: _Component = _Builtin.Block }) {
 
   const characterId = router.query.id; // Get character ID from router query
   const [character, setCharacter] = useState(null); // State to store character data
+  const [competences, setCompetences] = useState([
+    { id: "0", type: "Force", value: 0 },
+    { id: "1", type: "Agilité", value: 0 },
+    { id: "2", type: "Charisme", value: 0 },
+    { id: "3", type: "Chance", value: 0 },
+  ]);
+
+  useEffect(() => {
+    setCompetences([
+      { id: "0", type: "Force", value: character?.strength },
+      { id: "1", type: "Agilité", value: character?.agility },
+      { id: "2", type: "Charisme", value: character?.charisma },
+      { id: "3", type: "Chance", value: character?.luck },
+    ]);
+  }, [character]);
 
   // Function to delete the current character
   const deleteCurrentCharacter = () => {
@@ -60,6 +76,7 @@ function Page({ as: _Component = _Builtin.Block }) {
           navButtonsWrapperVisibility={false}
           navLinkWrapperVisibility={false}
           navClassWrapperVisibility={false}
+          editLink={{ href: `/characters/update/${character?.id}` }}
           deleteRuntimeProps={{ onClick: deleteCurrentCharacter }}
         />{" "}
         {/* Navigation component */}
@@ -69,6 +86,15 @@ function Page({ as: _Component = _Builtin.Block }) {
           backButtonLink={{
             href: "/characters/me",
           }}
+          competenceSlot={competences.map((competence) => (
+            <MoleculeCompetenceCard
+              key={competence.id}
+              statTitre={competence.type}
+              competenceNumberId={competence.id}
+              isDisabled={true}
+              skillValue={competence.value}
+            />
+          ))}
         />{" "}
         {/* Detail component for character */}
       </_Builtin.Block>

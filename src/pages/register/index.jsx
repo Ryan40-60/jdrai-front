@@ -47,9 +47,9 @@ function RegisterPage() {
       formData.password.trim() === "" ||
       formData.confirmPassword.trim() === ""
     ) {
-      alert("Please fill in all fields.");
+      alert("Veuillez remplir tous les champs.");
     } else if (formData.password !== formData.confirmPassword) {
-      alert("Passwords do not match.");
+      alert("Les mots de passes ne sont pas similaires.");
     } else {
       try {
         const [userData, error] = await register(formData);
