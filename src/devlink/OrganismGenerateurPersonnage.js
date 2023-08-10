@@ -23,10 +23,16 @@ export function OrganismGenerateurPersonnage({
   generateRuntimeProps = {},
   onSubmitRuntimeProps = {},
   pointLeft = "",
+  currentName = "",
+  isUpdate = false,
+  nameRuntimeProps = {},
   personnageImgImage = "https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cce7a2b4c8dd158beee42c_personnage.png",
 }) {
   return (
-    <_Component className={_utils.cx(_styles, "screen-content")}>
+    <_Component
+      className={_utils.cx(_styles, "screen-content")}
+      {...onSubmitRuntimeProps}
+    >
       <_Builtin.FormForm
         className={_utils.cx(_styles, "personnage-form")}
         name="email-form"
@@ -169,10 +175,11 @@ export function OrganismGenerateurPersonnage({
               className={_utils.cx(_styles, "personnage-content")}
               tag="div"
             >
-              <AtomsButtonSecondary
+              {/* <AtomsButtonSecondary
                 buttonRuntimeProps={generateRuntimeProps}
                 buttonText="Générer avec l'IA"
-              />
+              /> */}
+              <div></div>
               <_Builtin.Block
                 className={_utils.cx(_styles, "personnage-button_wrapper")}
                 tag="div"
@@ -181,26 +188,28 @@ export function OrganismGenerateurPersonnage({
                   className={_utils.cx(_styles, "form_input")}
                   autoFocus={false}
                   maxLength={256}
-                  name="Pseudo"
-                  data-name="Pseudo"
+                  name="pseudo"
+                  data-name="pseudo"
+                  value={isUpdate ? currentName : undefined}
                   placeholder="Votre pseudo..."
                   type="text"
                   disabled={false}
                   required={true}
-                  id="Pseudo"
+                  id="pseudo"
+                  {...(isUpdate ? nameRuntimeProps : {})}
                 />
                 <_Builtin.FormButton
                   className={_utils.cx(_styles, "button")}
                   type="submit"
                   value="Valider"
                   data-wait="Please wait..."
-                  {...onSubmitRuntimeProps}
                 />
               </_Builtin.Block>
             </_Builtin.Block>
           </_Builtin.Block>
         </_Builtin.Block>
       </_Builtin.FormForm>
+      {/* TODO: replace with chips */}
       <_Builtin.FormSuccessMessage>
         <_Builtin.Block tag="div">
           {"Thank you! Your submission has been received!"}

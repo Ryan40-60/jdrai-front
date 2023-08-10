@@ -36,12 +36,6 @@ export function OrganismPersoList({
             className={_utils.cx(_styles, "generateur-titre")}
             tag="div"
           >
-            <_Builtin.Block
-              className={_utils.cx(_styles, "text-size-tiny")}
-              tag="div"
-            >
-              {"Mes personnages"}
-            </_Builtin.Block>
             <_Builtin.Heading tag="h2">
               {"Mes personnages"}
               <br />

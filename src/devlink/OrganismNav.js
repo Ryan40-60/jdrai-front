@@ -35,6 +35,10 @@ export function OrganismNav({
   chooseClassArcherRuntimeProps = {},
   chooseClassVoleurRuntimeProps = {},
   disconnectRuntimeProps = {},
+  buttonRuntimeProps = {},
+  editLink = {
+    href: "#",
+  },
 }) {
   return (
     <_Component
@@ -80,11 +84,14 @@ export function OrganismNav({
             className={_utils.cx(_styles, "nav-edit_buttons_wrapper")}
             tag="div"
           >
+            <AtomsButtonIcon
+              buttonRuntimeProps={buttonRuntimeProps}
+              editLink={editLink}
+            />
             <AtomsButtonIconWarning
               buttonWarningRuntimeProps={deleteRuntimeProps}
               buttonWarningIcon="https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64ce1785090550f27ad94614_Delete.svg"
             />
-            <AtomsButtonIcon />
           </_Builtin.Block>
         ) : null}
         {navButtonsWrapperVisibility ? (
