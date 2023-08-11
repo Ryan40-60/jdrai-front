@@ -19,14 +19,7 @@ To get started with this project, follow these steps:
 
    ```
 
-3. Sync with Webflow, use the following command:
-
-   ```bash
-    npx webflow devlink sync
-
-   ```
-
-4. Run the development server:
+3. Run the development server:
 
    ```bash
    npm run dev
@@ -40,7 +33,7 @@ To get started with this project, follow these steps:
    pnpm dev
    ```
 
-5. Open http://localhost:5000 in your browser to see the project
+4. Open http://localhost:5000 in your browser to see the project
 
 ## Project Structure
 

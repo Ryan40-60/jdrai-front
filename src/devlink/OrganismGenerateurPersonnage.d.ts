@@ -14,4 +14,8 @@ declare function OrganismGenerateurPersonnage(props: {
   nameRuntimeProps?: Types.Devlink.RuntimeProps;
   pointLeft?: React.ReactNode;
   personnageImgImage?: Types.Asset.Image;
+  isError?: Types.Visibility.VisibilityConditions;
+  isSuccess?: Types.Visibility.VisibilityConditions;
+  errorChipLabel?: React.ReactNode;
+  successChipLabel?: React.ReactNode;
 }): React.JSX.Element;

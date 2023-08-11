@@ -27,9 +27,12 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
     }
   }, [user, router]);
 
-  const [characterClasses, setCharacterClasses] = useState([]); // State for character classes
-  const [selectedClass, setSelectedClass] = useState(null); // State for selected class
-  const [pool, setPool] = useState(100); // State for skill points
+  const [characterClasses, setCharacterClasses] = useState([]);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [pool, setPool] = useState(100);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorLabel, setErrorLabel] = useState(null);
 
   const [competences, setCompetences] = useState([
     { id: "0", type: "Force", value: 0 },
@@ -48,6 +51,9 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
 
   // Update form data on input change
   const handleChange = (e) => {
+    setIsError(false);
+    setErrorLabel(null);
+    setIsSuccess(false);
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -105,19 +111,30 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const characterBody = {
-      characterClassId: selectedClass.id,
-      name: formData.pseudo,
-      strength: formData.competence0,
-      agility: formData.competence1,
-      charisma: formData.competence2,
-      luck: formData.competence3,
-    };
-    const [characterData, error] = await createCharacter(characterBody);
-    if (error) {
-      console.log(error);
-    } else {
-      router.push(`/characters/${characterData.id}`);
+    if (pool > 0) {
+      const hasPoints = window.confirm(
+        `Il vous reste ${pool} points de compétences, voulez-vous tout de même créer ce personnage ?`
+      );
+      if (hasPoints) {
+        const characterBody = {
+          characterClassId: selectedClass.id,
+          name: formData.pseudo,
+          strength: formData.competence0,
+          agility: formData.competence1,
+          charisma: formData.competence2,
+          luck: formData.competence3,
+        };
+        const [characterData, error] = await createCharacter(characterBody);
+        if (error) {
+          setIsError(true);
+          setErrorLabel(error.data.message);
+        } else {
+          setIsSuccess(true);
+          setTimeout(() => {
+            router.push(`/characters/${characterData.id}`);
+          }, 750);
+        }
+      }
     }
   };
 
@@ -185,6 +202,10 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
           backButtonLink={{ href: "/characters/me" }}
           pointLeft={pool}
           isUpdate={false}
+          isError={isError}
+          isSuccess={isSuccess}
+          errorChipLabel={errorLabel}
+          successChipLabel={"Personnage créé avec succès..."}
           onSubmitRuntimeProps={{
             onChange: handleChange,
             onSubmit: handleSubmit,

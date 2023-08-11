@@ -4,6 +4,7 @@ import { MoleculeCompetenceCard } from "./MoleculeCompetenceCard";
 import { AtomsButtonSecondary } from "./AtomsButtonSecondary";
 import * as _utils from "./utils";
 import _styles from "./OrganismGenerateurPersonnage.module.css";
+import Chip from "@mui/material/Chip";
 
 export function OrganismGenerateurPersonnage({
   as: _Component = _Builtin.FormWrapper,
@@ -27,6 +28,10 @@ export function OrganismGenerateurPersonnage({
   isUpdate = false,
   nameRuntimeProps = {},
   personnageImgImage = "https://uploads-ssl.webflow.com/64cbe23719cf4bc2b30c2932/64cce7a2b4c8dd158beee42c_personnage.png",
+  isError = false,
+  isSuccess = false,
+  errorChipLabel = "",
+  successChipLabel = "",
 }) {
   return (
     <_Component
@@ -206,20 +211,23 @@ export function OrganismGenerateurPersonnage({
                 />
               </_Builtin.Block>
             </_Builtin.Block>
+            <_Builtin.Block tag="div">
+              {isSuccess && (
+                <Chip
+                  label={successChipLabel}
+                  variant="filled"
+                  color="success"
+                />
+              )}
+            </_Builtin.Block>
+            <_Builtin.Block tag="div">
+              {isError && (
+                <Chip label={errorChipLabel} variant="filled" color="error" />
+              )}
+            </_Builtin.Block>
           </_Builtin.Block>
         </_Builtin.Block>
       </_Builtin.FormForm>
-      {/* TODO: replace with chips */}
-      <_Builtin.FormSuccessMessage>
-        <_Builtin.Block tag="div">
-          {"Thank you! Your submission has been received!"}
-        </_Builtin.Block>
-      </_Builtin.FormSuccessMessage>
-      <_Builtin.FormErrorMessage>
-        <_Builtin.Block tag="div">
-          {"Oops! Something went wrong while submitting the form."}
-        </_Builtin.Block>
-      </_Builtin.FormErrorMessage>
     </_Component>
   );
 }

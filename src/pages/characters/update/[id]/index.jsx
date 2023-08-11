@@ -21,20 +21,21 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
   const { user, setUser, setRefreshToken, setAccessToken } =
     useContext(AuthContext);
   const characterId = router.query.id;
-  const skills = ["strength", "agility", "charisma", "luck"];
+  const [characterClasses, setCharacterClasses] = useState([]);
+  const [selectedClass, setSelectedClass] = useState(null);
+  const [character, setCharacter] = useState(null);
+  const [pool, setPool] = useState(0);
+  const [currentName, setName] = useState("");
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorLabel, setErrorLabel] = useState(null);
 
-  // Redirect to registration page if user is not logged in
+  // Redirect to login page if user is not logged in
   useEffect(() => {
     if (!user) {
       router.push("/login");
     }
   }, [user, router]);
-
-  const [characterClasses, setCharacterClasses] = useState([]); // State for character classes
-  const [selectedClass, setSelectedClass] = useState(null); // State for selected class
-  const [character, setCharacter] = useState(null); // State for selected class
-  const [pool, setPool] = useState(0); // State for skill points
-  const [currentName, setName] = useState("");
 
   const [competences, setCompetences] = useState([
     { id: "0", type: "Force", value: 0 },
@@ -53,6 +54,9 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
 
   // Update form data on input change
   const handleChange = (e) => {
+    setIsError(false);
+    setErrorLabel(null);
+    setIsSuccess(false);
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -110,22 +114,34 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const updatedCharacterBody = {
-      characterClassId: selectedClass.id,
-      name: formData.pseudo,
-      strength: formData.competence0,
-      agility: formData.competence1,
-      charisma: formData.competence2,
-      luck: formData.competence3,
-    };
-    const [updatedCharacterData, error] = await updateCharacter(
-      characterId,
-      updatedCharacterBody
-    );
-    if (error) {
-      console.log(error);
-    } else {
-      router.push(`/characters/${character.id}`);
+
+    if (pool > 0) {
+      const hasPoints = window.confirm(
+        `Il vous reste ${pool} points de compétences, voulez-vous tout de même modifier ce personnage ?`
+      );
+      if (hasPoints) {
+        const updatedCharacterBody = {
+          characterClassId: selectedClass.id,
+          name: formData.pseudo,
+          strength: formData.competence0,
+          agility: formData.competence1,
+          charisma: formData.competence2,
+          luck: formData.competence3,
+        };
+        const [updatedCharacterData, error] = await updateCharacter(
+          characterId,
+          updatedCharacterBody
+        );
+        if (error) {
+          setIsError(true);
+          setErrorLabel(error.data.message);
+        } else {
+          setIsSuccess(true);
+          setTimeout(() => {
+            router.push(`/characters/${updatedCharacterData.id}`);
+          }, 750);
+        }
+      }
     }
   };
 
@@ -188,12 +204,13 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
 
   useEffect(() => {
     setPool(
-      formData.competence0 +
-        formData.competence1 +
-        formData.competence2 +
-        formData.competence3
+      100 -
+        (competences[0].value +
+          competences[1].value +
+          competences[2].value +
+          competences[3].value)
     );
-  }, [formData]);
+  }, [competences]);
 
   const handleName = (e) => {
     setName(e.target.value);
@@ -241,6 +258,10 @@ function CharacterCreationPage({ as: _Component = _Builtin.Block }) {
           currentName={currentName}
           nameRuntimeProps={{ onChange: handleName }}
           isUpdate={true}
+          isError={isError}
+          isSuccess={isSuccess}
+          errorChipLabel={errorLabel}
+          successChipLabel={"Personnage modifié avec succès..."}
           onSubmitRuntimeProps={{
             onChange: handleChange,
             onSubmit: handleSubmit,

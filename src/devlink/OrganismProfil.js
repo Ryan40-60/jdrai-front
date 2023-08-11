@@ -69,7 +69,7 @@ export function OrganismProfil({
                   {"Pseudo"}
                 </_Builtin.FormBlockLabel>
                 <_Builtin.FormTextInput
-                  className={_utils.cx(_styles, "form_input")}
+                  className={_utils.cx(_styles, "form_input_profil")}
                   autoFocus={false}
                   maxLength={256}
                   name="username"
@@ -91,7 +91,7 @@ export function OrganismProfil({
                   {"Email"}
                 </_Builtin.FormBlockLabel>
                 <_Builtin.FormTextInput
-                  className={_utils.cx(_styles, "form_input")}
+                  className={_utils.cx(_styles, "form_input_profil")}
                   autoFocus={false}
                   maxLength={256}
                   name="email"
@@ -125,16 +125,6 @@ export function OrganismProfil({
                 </_Builtin.Block>
               </_Builtin.Link>
             </_Builtin.Block>
-            <_Builtin.FormSuccessMessage>
-              <_Builtin.Block tag="div">
-                {"Thank you! Your submission has been received!"}
-              </_Builtin.Block>
-            </_Builtin.FormSuccessMessage>
-            <_Builtin.FormErrorMessage>
-              <_Builtin.Block tag="div">
-                {"Oops! Something went wrong while submitting the form."}
-              </_Builtin.Block>
-            </_Builtin.FormErrorMessage>
           </_Builtin.FormWrapper>
         </_Builtin.Block>
       </_Builtin.Block>

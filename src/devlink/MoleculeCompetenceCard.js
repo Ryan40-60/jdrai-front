@@ -46,7 +46,7 @@ export function MoleculeCompetenceCard({
           id={competenceNumberId}
           {...competenceRuntimeProps}
         />
-        <_Builtin.Block
+        {/* <_Builtin.Block
           className={_utils.cx(_styles, "points-card", "is-actif")}
           tag="div"
         />
@@ -77,7 +77,7 @@ export function MoleculeCompetenceCard({
         <_Builtin.Block
           className={_utils.cx(_styles, "points-card")}
           tag="div"
-        />
+        /> */}
       </_Builtin.Block>
     </_Component>
   );

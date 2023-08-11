@@ -6,7 +6,6 @@ import { addToLocalStorage } from "@/services/localStorage.service";
 import { PageInscription } from "@/devlink";
 import * as _Builtin from "@/devlink/_Builtin";
 import * as _interactions from "@/devlink/interactions";
-import { GlobalStyles } from "@/devlink/GlobalStyles";
 import * as _utils from "@/devlink/utils";
 import _styles from "@/devlink/PageInscription.module.css";
 
@@ -14,6 +13,9 @@ function RegisterPage() {
   const router = useRouter();
   const { user, setUser, setRefreshToken, setAccessToken } =
     useContext(AuthContext);
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
+  const [errorLabel, setErrorLabel] = useState(null);
 
   // Redirect to characters page if user is already logged in
   useEffect(() => {
@@ -31,6 +33,9 @@ function RegisterPage() {
 
   // Update form data on input change
   const handleChange = (e) => {
+    setIsError(false);
+    setErrorLabel(null);
+    setIsSuccess(false);
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
       ...prevFormData,
@@ -47,18 +52,23 @@ function RegisterPage() {
       formData.password.trim() === "" ||
       formData.confirmPassword.trim() === ""
     ) {
-      alert("Veuillez remplir tous les champs.");
+      setIsError(true);
+      setErrorLabel("Veuillez remplir tous les champs.");
     } else if (formData.password !== formData.confirmPassword) {
-      alert("Les mots de passes ne sont pas similaires.");
+      setIsError(true);
+      setErrorLabel("Les mots de passes ne correspondent pas.");
     } else {
       try {
         const [userData, error] = await register(formData);
         if (error) {
+          setIsError(true);
+          setErrorLabel(error.data.message);
           console.log("Registration failed:", error.status);
         } else {
           // Handle successful registration here
           console.log("Registration successful:", userData);
 
+          setIsSuccess(true);
           // Extract the required variables from the user data
           const { user, access, refresh } = userData;
 
@@ -85,6 +95,10 @@ function RegisterPage() {
         onSubmit: handleSubmit,
       }}
       connexionLink={{ href: "/login" }}
+      isError={isError}
+      isSuccess={isSuccess}
+      errorChipLabel={errorLabel}
+      successChipLabel={"Inscription réussie"}
     />
   );
 }

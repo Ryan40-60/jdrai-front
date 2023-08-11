@@ -28,6 +28,7 @@ function LoginPage() {
   // Update form data on input change
   const handleChange = (e) => {
     setIsError(false);
+    setErrorLabel(null);
     setIsSuccess(false);
     const { name, value } = e.target;
     setFormData((prevFormData) => ({
@@ -43,12 +44,12 @@ function LoginPage() {
       formData.usernameOrEmail.trim() === "" ||
       formData.password.trim() === ""
     ) {
-      alert("Please fill in all fields.");
+      setIsError(true);
+      setErrorLabel("Veuillez remplir tous les champs.");
     } else {
       try {
         const [userData, userError] = await login(formData);
         if (userError) {
-          // alert(userError.data.message);
           setIsError(true);
           setErrorLabel(userError.data.message);
           console.log("Login failed:", userError);

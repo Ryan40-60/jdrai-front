@@ -1,10 +1,8 @@
-import React, { useState } from "react";
+import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { TextField, Button } from "@mui/material";
 import Image from "next/image";
-
-// import { submitFeedback } from "@/services/feedbackService";
 import { GlobalStyles } from "@/devlink/GlobalStyles";
 
 // Define the content and description of the project
@@ -12,6 +10,7 @@ const projectDescription =
   "JDRAI est une plateforme de jeux de rôle en ligne qui souhaite exploiter la puissance de l'IA et des modèles de langage pour créer des histoires captivantes et immersives. Notre objectif est d'offrir une expérience narrative interactive unique, permettant aux utilisateurs de se lancer dans des aventures dans des mondes dynamiques et évolutifs.";
 const currentSite =
   "Le site que vous visitez actuellement représente une version d'essai du projet JDRAI. Bien qu'il offre un aperçu de notre vision, tout le potentiel de JDRAI est encore à venir. Nous sommes enthousiastes à l'idée de continuer à développement et l'amélioration de notre plateforme afin de vous offrir une expérience de jeu de rôle inégalée.";
+
 const AboutPage = () => {
   const router = useRouter();
 
@@ -37,10 +36,12 @@ const AboutPage = () => {
                 <p>{currentSite}</p>
               </div>
               <div className="img-container">
-                <img
+                <Image
                   className="feature-img"
-                  src="./assets/maquette.png"
+                  src="/assets/maquette.png"
                   alt=""
+                  width={600}
+                  height={400}
                 />
               </div>
             </div>
@@ -59,7 +60,10 @@ const AboutPage = () => {
                   variant="contained"
                   color="primary"
                   className="feedback-btn"
-                  onClick={() => router.push("mailto:feedback@jdrai.com")}
+                  onClick={(e) => {
+                    e.preventDefault();
+                    router.push("mailto:feedback@jdrai.com");
+                  }}
                 >
                   Soumettre mon avis
                 </Button>
